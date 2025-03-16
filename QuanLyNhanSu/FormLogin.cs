@@ -87,8 +87,10 @@ namespace QuanLyNhanSu
                     string password = tbpassword.Text.Trim();
 
                     string query = @"
-            SELECT NhanVien.ID_NhanVien, NguoiDung.Role,NhanVien.SoCCCD 
+            SELECT NhanVien.ID_NhanVien, NguoiDung.Role,NhanVien.SoCCCD,NhanVien.NgaySinh,NhanVien.GioiTinh,NhanVien.QueQuan,NhanVien.SDT,NhanVien.DiaChi,NhanVien.Email,ChucVu.Ten_ChucVu,PhongBan.Ten_PhongBan,NhanVien.HoTen
             FROM NguoiDung JOIN NhanVien ON NhanVien.Username = NguoiDung.Username
+            JOIN PhongBan ON NhanVien.ID_PhongBan = PhongBan.ID_PhongBan
+            JOIN ChucVu ON NhanVien.ID_ChucVu = ChucVu.ID_ChucVu
             WHERE NguoiDung.Username = @username AND NguoiDung.Password = @password";
 
                     using (SqlCommand cmd = new SqlCommand(query, sqlConnection))
@@ -102,9 +104,21 @@ namespace QuanLyNhanSu
                             {
                                 User.ID_NhanVien = reader.GetInt32(0);
                                 User.Username = username;
-                                User.Role = reader.GetString(1);
+                                User.Role = reader.IsDBNull(1) ? "User" : reader.GetString(1); // Role (nếu NULL thì mặc định là "User")
+
+                                // Kiểm tra NULL trước khi đọc dữ liệu
+                                User.CCCD = reader.IsDBNull(2) ? "Không có CCCD" : reader.GetString(2);
+                                User.NgaySinh = reader.IsDBNull(3) ? DateTime.MinValue : reader.GetDateTime(3);
+                                User.GioiTinh = reader.IsDBNull(4) ? "Không xác định" : reader.GetString(4);
+                                User.QueQuan = reader.IsDBNull(5) ? "Không có dữ liệu" : reader.GetString(5);
+                                User.SDT = reader.IsDBNull(6) ? "Không có số" : reader.GetString(6);
+                                User.DiaChi = reader.IsDBNull(7) ? "Không có địa chỉ" : reader.GetString(7);
+                                User.Email = reader.IsDBNull(8) ? "Không có email" : reader.GetString(8);
+                                User.ChucVu = reader.IsDBNull(9) ? "Không có chức vụ" : reader.GetString(9);
+                                User.PhongBan = reader.IsDBNull(10) ? "Không có phòng ban" : reader.GetString(10);
+                                User.HoTen = reader.GetString(11);
+
                                 User.Password = password;
-                                User.CCCD = reader.GetString(2);
 
                                 this.DialogResult = DialogResult.OK;
                                 this.Close();
@@ -115,6 +129,7 @@ namespace QuanLyNhanSu
                             }
                         }
                     }
+
                 }
             }
             catch (Exception ex)

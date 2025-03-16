@@ -222,5 +222,15 @@ namespace QuanLyNhanSu
         {
 
         }
+
+        private void btnBaoHiem_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            using(Form15 form = new Form15())
+            {
+                form.ShowDialog();
+            }
+            this.Show();
+        }
     }
 }
