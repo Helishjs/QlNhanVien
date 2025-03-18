@@ -16,11 +16,25 @@ namespace QuanLyNhanSu
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
             FormLogin loginForm = new FormLogin();
+
             if (loginForm.ShowDialog() == DialogResult.OK)
             {
-                Application.Run(new MainForm());
+                Form mainForm;
+
+                if (User.Role == "admin")
+                {
+                    mainForm = new Form8();  // Admin form
+                }
+                else
+                {
+                    mainForm = new MainForm();  // User form
+                }
+
+                Application.Run(mainForm);
             }
         }
+
     }
 }

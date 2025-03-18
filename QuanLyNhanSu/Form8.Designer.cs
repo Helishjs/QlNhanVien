@@ -28,33 +28,169 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
+            this.CTNV = new System.Windows.Forms.Button();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.DSNV = new System.Windows.Forms.Button();
+            this.TKNV = new System.Windows.Forms.Button();
+            this.LL = new System.Windows.Forms.Button();
+            this.KTBN = new System.Windows.Forms.Button();
+            this.DTB = new System.Windows.Forms.Button();
+            this.KTL = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // button1
+            // CTNV
             // 
-            this.button1.Location = new System.Drawing.Point(287, 153);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.CTNV.BackColor = System.Drawing.Color.LightGray;
+            this.CTNV.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.CTNV.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.CTNV.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.CTNV.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CTNV.Location = new System.Drawing.Point(3, 108);
+            this.CTNV.Name = "CTNV";
+            this.CTNV.Size = new System.Drawing.Size(149, 99);
+            this.CTNV.TabIndex = 3;
+            this.CTNV.Text = "Chi Tiết Nhân Viên";
+            this.CTNV.UseVisualStyleBackColor = false;
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.flowLayoutPanel1.AutoScroll = true;
+            this.flowLayoutPanel1.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.flowLayoutPanel1.Controls.Add(this.DSNV);
+            this.flowLayoutPanel1.Controls.Add(this.CTNV);
+            this.flowLayoutPanel1.Controls.Add(this.TKNV);
+            this.flowLayoutPanel1.Controls.Add(this.LL);
+            this.flowLayoutPanel1.Controls.Add(this.KTBN);
+            this.flowLayoutPanel1.Controls.Add(this.DTB);
+            this.flowLayoutPanel1.Controls.Add(this.KTL);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(2, 0);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(176, 550);
+            this.flowLayoutPanel1.TabIndex = 2;
+            // 
+            // DSNV
+            // 
+            this.DSNV.BackColor = System.Drawing.Color.LightGray;
+            this.DSNV.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.DSNV.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.DSNV.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.DSNV.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DSNV.Location = new System.Drawing.Point(3, 3);
+            this.DSNV.Name = "DSNV";
+            this.DSNV.Size = new System.Drawing.Size(149, 99);
+            this.DSNV.TabIndex = 2;
+            this.DSNV.Text = "Danh Sách Nhân Viên";
+            this.DSNV.UseVisualStyleBackColor = false;
+            // 
+            // TKNV
+            // 
+            this.TKNV.BackColor = System.Drawing.Color.LightGray;
+            this.TKNV.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.TKNV.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.TKNV.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.TKNV.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TKNV.Location = new System.Drawing.Point(3, 213);
+            this.TKNV.Name = "TKNV";
+            this.TKNV.Size = new System.Drawing.Size(149, 99);
+            this.TKNV.TabIndex = 4;
+            this.TKNV.Text = "Tài Khoản Nhân Viên";
+            this.TKNV.UseVisualStyleBackColor = false;
+            // 
+            // LL
+            // 
+            this.LL.BackColor = System.Drawing.Color.LightGray;
+            this.LL.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.LL.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.LL.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.LL.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LL.Location = new System.Drawing.Point(3, 318);
+            this.LL.Name = "LL";
+            this.LL.Size = new System.Drawing.Size(149, 99);
+            this.LL.TabIndex = 5;
+            this.LL.Text = "Lịch Làm";
+            this.LL.UseVisualStyleBackColor = false;
+            // 
+            // KTBN
+            // 
+            this.KTBN.BackColor = System.Drawing.Color.LightGray;
+            this.KTBN.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.KTBN.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.KTBN.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.KTBN.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.KTBN.Location = new System.Drawing.Point(3, 423);
+            this.KTBN.Name = "KTBN";
+            this.KTBN.Size = new System.Drawing.Size(149, 99);
+            this.KTBN.TabIndex = 6;
+            this.KTBN.Text = "Kiểm Tra Ban Ngành";
+            this.KTBN.UseVisualStyleBackColor = false;
+            // 
+            // DTB
+            // 
+            this.DTB.BackColor = System.Drawing.Color.LightGray;
+            this.DTB.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.DTB.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.DTB.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.DTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DTB.Location = new System.Drawing.Point(3, 528);
+            this.DTB.Name = "DTB";
+            this.DTB.Size = new System.Drawing.Size(149, 99);
+            this.DTB.TabIndex = 7;
+            this.DTB.Text = "Đăng Thông Báo";
+            this.DTB.UseVisualStyleBackColor = false;
+            // 
+            // KTL
+            // 
+            this.KTL.BackColor = System.Drawing.Color.LightGray;
+            this.KTL.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.KTL.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.KTL.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.KTL.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.KTL.Location = new System.Drawing.Point(3, 633);
+            this.KTL.Name = "KTL";
+            this.KTL.Size = new System.Drawing.Size(149, 99);
+            this.KTL.TabIndex = 8;
+            this.KTL.Text = "Kiểm Tra Lương";
+            this.KTL.UseVisualStyleBackColor = false;
+            // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Location = new System.Drawing.Point(177, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(804, 552);
+            this.panel1.TabIndex = 3;
             // 
             // Form8
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(982, 553);
+            this.Controls.Add(this.flowLayoutPanel1);
+            this.Controls.Add(this.panel1);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form8";
             this.Text = "Form8";
+            this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button CTNV;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.Button DSNV;
+        private System.Windows.Forms.Button TKNV;
+        private System.Windows.Forms.Button LL;
+        private System.Windows.Forms.Button KTBN;
+        private System.Windows.Forms.Button DTB;
+        private System.Windows.Forms.Button KTL;
+        private System.Windows.Forms.Panel panel1;
     }
 }

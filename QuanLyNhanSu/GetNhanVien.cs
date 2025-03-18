@@ -192,7 +192,7 @@ namespace QuanLyNhanSu
                      Email = @Email, 
                      SDT = @SDT, 
                      SoCCCD = @SoCCCD, 
-                     DiaChi = @DiaChi,  -- ĐÃ SỬA LỖI
+                     DiaChi = @DiaChi,
                      ID_PhongBan = @PhongBan, 
                      ID_ChucVu = @ChucVu 
                  WHERE ID_NhanVien = @ID";

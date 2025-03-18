@@ -232,5 +232,15 @@ namespace QuanLyNhanSu
             }
             this.Show();
         }
+
+        private void btnHopdonglaodong_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            using(Form8 form = new Form8())
+            {
+                form.ShowDialog();
+            }
+            this.Show();
+        }
     }
 }
