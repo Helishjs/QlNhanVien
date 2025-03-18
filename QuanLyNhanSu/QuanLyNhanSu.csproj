@@ -48,6 +48,12 @@
   <ItemGroup>
     <Compile Include="Chuyenkhongdau.cs" />
     <Compile Include="Connection.cs" />
+    <Compile Include="DanhSachNhanVien.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DanhSachNhanVien.Designer.cs">
+      <DependentUpon>DanhSachNhanVien.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataSet1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -198,9 +204,30 @@
       <DependentUpon>FormSuaNhanVien.cs</DependentUpon>
     </Compile>
     <Compile Include="GetNhanVien.cs" />
+    <Compile Include="ManHinhChao.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ManHinhChao.Designer.cs">
+      <DependentUpon>ManHinhChao.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QuanLyNhanSu.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="QuanLyNhanSu.Designer.cs">
+      <DependentUpon>QuanLyNhanSu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TaoXoaTaiKhoan.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TaoXoaTaiKhoan.Designer.cs">
+      <DependentUpon>TaoXoaTaiKhoan.cs</DependentUpon>
+    </Compile>
     <Compile Include="User.cs" />
+    <EmbeddedResource Include="DanhSachNhanVien.resx">
+      <DependentUpon>DanhSachNhanVien.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
@@ -273,6 +300,9 @@
     <EmbeddedResource Include="FormSuaNhanVien.resx">
       <DependentUpon>FormSuaNhanVien.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ManHinhChao.resx">
+      <DependentUpon>ManHinhChao.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -281,7 +311,14 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="QuanLyNhanSu.resx">
+      <DependentUpon>QuanLyNhanSu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TaoXoaTaiKhoan.resx">
+      <DependentUpon>TaoXoaTaiKhoan.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="DataSet1.xsc">
       <DependentUpon>DataSet1.xsd</DependentUpon>
     </None>
@@ -305,6 +342,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\anh-nu-doanh-nhan-34.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\peakpx.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

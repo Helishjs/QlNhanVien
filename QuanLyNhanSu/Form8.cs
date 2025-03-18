@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -12,17 +13,21 @@ namespace QuanLyNhanSu
 {
     public partial class Form8 : Form
     {
+        string sqlstring = @"Data Source=DESKTOP-B4J24OU\MSSQLSERVER01;Initial Catalog=QLNhanVien;Integrated Security=True;TrustServerCertificate=True";
+
+
         int NhanVienDuocChon = -1;
         public DataTable dt;
 
         ManHinhChao MHC = new ManHinhChao();
         DanhSachNhanVien DanhSach = new DanhSachNhanVien();
-        QuanLyNhanSu QuanLynhansu = new QuanLyNhanSu();
+        QuanLyNhanSu1 QuanLynhansu = new QuanLyNhanSu1();
         TaoXoaTaiKhoan taoXoaTaikhoan = new TaoXoaTaiKhoan();
 
         public Form8()
         {
             InitializeComponent();
+
 
             dt = new DataTable();
             dt.Columns.Add("Họ Tên", typeof(string));
@@ -59,6 +64,8 @@ namespace QuanLyNhanSu
             DanhSach.LayMaNhanVien += User_NhanVienDuocChon;
             DanhSach.HienThiQLNV += QLNS_Click;
             QuanLynhansu.HienThiDanhSach += DSNV_Click;
+
+           
         }
 
         private void DSNV_Click(object sender, EventArgs e)
@@ -93,6 +100,11 @@ namespace QuanLyNhanSu
             NhanVienDuocChon = newValue;
             QuanLynhansu.QuanLyMa(NhanVienDuocChon);
             NhanVienDuocChon = -1;
+        }
+
+        private void Form8_Load(object sender, EventArgs e)
+        {
+          
         }
     }
 }

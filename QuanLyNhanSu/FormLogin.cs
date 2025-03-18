@@ -113,12 +113,12 @@ namespace QuanLyNhanSu
                         }
                         else
                         {
-                            using (SqlCommand cmd = new SqlCommand(query, sqlConnection))
+                            using (SqlCommand cmds = new SqlCommand(query, sqlConnection))
                             {
-                                cmd.Parameters.Add(new SqlParameter("@username", SqlDbType.NVarChar) { Value = username });
-                                cmd.Parameters.Add(new SqlParameter("@password", SqlDbType.NVarChar) { Value = password });
+                                cmds.Parameters.Add(new SqlParameter("@username", SqlDbType.NVarChar) { Value = username });
+                                cmds.Parameters.Add(new SqlParameter("@password", SqlDbType.NVarChar) { Value = password });
 
-                                using (SqlDataReader reader = cmd.ExecuteReader())
+                                using (SqlDataReader reader = cmds.ExecuteReader())
                                 {
                                     if (reader.Read())
                                     {
