@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
+using System.Data.SqlTypes;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -13,8 +14,6 @@ namespace QuanLyNhanSu
 {
     public partial class Form8 : Form
     {
-        string sqlstring = @"Data Source=DESKTOP-B4J24OU\MSSQLSERVER01;Initial Catalog=QLNhanVien;Integrated Security=True;TrustServerCertificate=True";
-
 
         int NhanVienDuocChon = -1;
         public DataTable dt;
@@ -27,21 +26,6 @@ namespace QuanLyNhanSu
         public Form8()
         {
             InitializeComponent();
-
-
-            dt = new DataTable();
-            dt.Columns.Add("Họ Tên", typeof(string));
-            dt.Columns.Add("Ngày Sinh", typeof(DateTime));
-            dt.Columns.Add("Giới Tính", typeof(string));
-            dt.Columns.Add("Quê Quán", typeof(string));
-            dt.Columns.Add("CCCD", typeof(string));
-            dt.Columns.Add("Số Điện Thoại", typeof(string));
-            dt.Columns.Add("Địa Chỉ", typeof(string));
-            dt.Columns.Add("Email", typeof(string));
-            dt.Columns.Add("Chức Vụ", typeof(string));
-            dt.Columns.Add("Phòng Ban", typeof(string));
-            dt.Columns.Add("Bảo Hiểm", typeof(string));
-            dt.Columns.Add("Trợ Cấp", typeof(string));
 
             panel1.Controls.Add(MHC);
             panel1.Controls.Add(DanhSach);
@@ -71,6 +55,7 @@ namespace QuanLyNhanSu
         private void DSNV_Click(object sender, EventArgs e)
         {
             DanhSach.BringToFront();
+
         }
 
         private void QLNS_Click(object sender, EventArgs e)
@@ -94,6 +79,7 @@ namespace QuanLyNhanSu
         private void TKNV_Click(object sender, EventArgs e)
         {
             taoXoaTaikhoan.BringToFront();
+           
         }
         private void User_NhanVienDuocChon(object sender, int newValue)
         {

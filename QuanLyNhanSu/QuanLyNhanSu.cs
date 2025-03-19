@@ -127,25 +127,49 @@ namespace QuanLyNhanSu
 
         public void HienThiThongTinCaNhan()
         {
+            // Kiểm tra nếu DataTable không có dữ liệu
+            if (_dt == null || _dt.Rows.Count == 0)
+            {
+                MessageBox.Show("Không có dữ liệu nhân viên.");
+                return;
+            }
+
+            // Tìm dòng chứa nhân viên có ID tương ứng
+            DataRow[] rows = _dt.Select($"ID_NhanVien = ");
+
+            // Kiểm tra xem có tìm thấy nhân viên không
+            if (rows.Length == 0)
+            {
+                MessageBox.Show("Không tìm thấy thông tin nhân viên.");
+                return;
+            }
+
+            DataRow row = rows[0]; // Lấy dòng đầu tiên tìm được
+
+
             HoTenTB.ReadOnly = true;
             QueQuanTB.ReadOnly = true;
             CCCDTB.ReadOnly = true;
             SDTTB.ReadOnly = true;
             DiaChiTB.ReadOnly = true;
             EmailTB.ReadOnly = true;
+x
+            HoTenTB.Text = row["HoTen"].ToString();
+            NgaySinhTB.Text = row["NgaySinh"] != DBNull.Value ? ((DateTime)row["NgaySinh"]).ToShortDateString() : "";
+            GioiTinhTB.Text = row["GioiTinh"].ToString();
+            QueQuanTB.Text = row["QueQuan"].ToString();
+            CCCDTB.Text = row["CCCD"].ToString();
+            SDTTB.Text = row["SDT"].ToString();
+            DiaChiTB.Text = row["DiaChi"].ToString();
+            EmailTB.Text = row["Email"].ToString();
+            ChucVuTB.Text = row["Ten_ChucVu"].ToString();
+            PhongBanTB.Text = row["Ten_PhongBan"].ToString();
 
-            HoTenTB.Text = _dt.Rows[manhanvien]["Họ Tên"].ToString();
-            NgaySinhTB.Text = ((DateTime)_dt.Rows[manhanvien]["Ngày Sinh"]).ToShortDateString();
-            GioiTinhTB.Text = _dt.Rows[manhanvien]["Giới Tính"].ToString();
-            QueQuanTB.Text = _dt.Rows[manhanvien]["Quê Quán"].ToString();
-            CCCDTB.Text = _dt.Rows[manhanvien]["CCCD"].ToString();
-            SDTTB.Text = _dt.Rows[manhanvien]["Số Điện Thoại"].ToString();
-            DiaChiTB.Text = _dt.Rows[manhanvien]["Địa Chỉ"].ToString();
-            EmailTB.Text = _dt.Rows[manhanvien]["Email"].ToString();
-            ChucVuTB.Text = _dt.Rows[manhanvien]["Chức Vụ"].ToString();
-            PhongBanTB.Text = _dt.Rows[manhanvien]["Phòng Ban"].ToString();
-            BaoHiemTB.Text = _dt.Rows[manhanvien]["Bảo Hiểm"].ToString();
-            TroCapTB.Text = _dt.Rows[manhanvien]["Trợ Cấp"].ToString();
+
+            if (_dt.Columns.Contains("BaoHiem"))
+                BaoHiemTB.Text = row["BaoHiem"].ToString();
+            if (_dt.Columns.Contains("TroCap"))
+                TroCapTB.Text = row["TroCap"].ToString();
 
             GioiTinhCB.Text = GioiTinhTB.Text;
             ChucVuCB.Text = ChucVuTB.Text;

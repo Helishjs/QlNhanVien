@@ -126,16 +126,16 @@
             // tableLayout
             // 
             this.tableLayout.ColumnCount = 3;
-            this.tableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 43.66883F));
-            this.tableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 56.33117F));
-            this.tableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 206F));
+            this.tableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayout.Controls.Add(this.tableLayoutPanel2, 0, 0);
             this.tableLayout.Controls.Add(this.tableLayoutPanel1, 1, 0);
             this.tableLayout.Controls.Add(this.tableLayoutPanel3, 2, 0);
             this.tableLayout.Location = new System.Drawing.Point(0, 0);
             this.tableLayout.Name = "tableLayout";
             this.tableLayout.RowCount = 1;
-            this.tableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayout.Size = new System.Drawing.Size(828, 76);
             this.tableLayout.TabIndex = 3;
             this.tableLayout.Paint += new System.Windows.Forms.PaintEventHandler(this.btnNhanvienthaisan_Paint);
@@ -143,22 +143,22 @@
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.ColumnCount = 3;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 92F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel2.Controls.Add(this.btnDieuDongnv, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.btnPhepnam, 2, 0);
             this.tableLayoutPanel2.Controls.Add(this.btnDanhmucnv, 0, 0);
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(265, 70);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // btnDieuDongnv
             // 
-            this.btnDieuDongnv.Location = new System.Drawing.Point(89, 3);
+            this.btnDieuDongnv.Location = new System.Drawing.Point(91, 3);
             this.btnDieuDongnv.Name = "btnDieuDongnv";
             this.btnDieuDongnv.Size = new System.Drawing.Size(80, 64);
             this.btnDieuDongnv.TabIndex = 1;
@@ -167,7 +167,7 @@
             // 
             // btnPhepnam
             // 
-            this.btnPhepnam.Location = new System.Drawing.Point(175, 3);
+            this.btnPhepnam.Location = new System.Drawing.Point(179, 3);
             this.btnPhepnam.Name = "btnPhepnam";
             this.btnPhepnam.Size = new System.Drawing.Size(81, 64);
             this.btnPhepnam.TabIndex = 2;
@@ -186,53 +186,53 @@
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 4;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 51.82927F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 48.17073F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 91F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 89F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.Controls.Add(this.btnThaisan, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.btnChamCong, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.btnTangCa, 3, 0);
             this.tableLayoutPanel1.Controls.Add(this.btnNghiViec, 1, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(274, 3);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(278, 3);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(344, 70);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(269, 70);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // btnThaisan
             // 
             this.btnThaisan.Location = new System.Drawing.Point(3, 3);
             this.btnThaisan.Name = "btnThaisan";
-            this.btnThaisan.Size = new System.Drawing.Size(79, 64);
+            this.btnThaisan.Size = new System.Drawing.Size(61, 64);
             this.btnThaisan.TabIndex = 2;
             this.btnThaisan.Text = " Nhân viên thai sản";
             this.btnThaisan.UseVisualStyleBackColor = true;
             // 
             // btnChamCong
             // 
-            this.btnChamCong.Location = new System.Drawing.Point(167, 3);
+            this.btnChamCong.Location = new System.Drawing.Point(137, 3);
             this.btnChamCong.Name = "btnChamCong";
-            this.btnChamCong.Size = new System.Drawing.Size(85, 64);
+            this.btnChamCong.Size = new System.Drawing.Size(61, 64);
             this.btnChamCong.TabIndex = 4;
             this.btnChamCong.Text = "Chấm công";
             this.btnChamCong.UseVisualStyleBackColor = true;
             // 
             // btnTangCa
             // 
-            this.btnTangCa.Location = new System.Drawing.Point(258, 3);
+            this.btnTangCa.Location = new System.Drawing.Point(204, 3);
             this.btnTangCa.Name = "btnTangCa";
-            this.btnTangCa.Size = new System.Drawing.Size(70, 64);
+            this.btnTangCa.Size = new System.Drawing.Size(62, 64);
             this.btnTangCa.TabIndex = 5;
             this.btnTangCa.Text = "Đăng kí tăng ca";
             this.btnTangCa.UseVisualStyleBackColor = true;
             // 
             // btnNghiViec
             // 
-            this.btnNghiViec.Location = new System.Drawing.Point(88, 3);
+            this.btnNghiViec.Location = new System.Drawing.Point(70, 3);
             this.btnNghiViec.Name = "btnNghiViec";
-            this.btnNghiViec.Size = new System.Drawing.Size(73, 64);
+            this.btnNghiViec.Size = new System.Drawing.Size(61, 64);
             this.btnNghiViec.TabIndex = 3;
             this.btnNghiViec.Text = "Nhân viên nghỉ việc";
             this.btnNghiViec.UseVisualStyleBackColor = true;
@@ -244,18 +244,18 @@
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel3.Controls.Add(this.btnBaoHiem, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.btnHopdonglaodong, 1, 0);
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(624, 3);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(553, 3);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(187, 70);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(177, 70);
             this.tableLayoutPanel3.TabIndex = 2;
             // 
             // btnBaoHiem
             // 
             this.btnBaoHiem.Location = new System.Drawing.Point(3, 3);
             this.btnBaoHiem.Name = "btnBaoHiem";
-            this.btnBaoHiem.Size = new System.Drawing.Size(87, 64);
+            this.btnBaoHiem.Size = new System.Drawing.Size(82, 64);
             this.btnBaoHiem.TabIndex = 0;
             this.btnBaoHiem.Text = "Bảo hiểm xã hội";
             this.btnBaoHiem.UseVisualStyleBackColor = true;
@@ -263,9 +263,9 @@
             // 
             // btnHopdonglaodong
             // 
-            this.btnHopdonglaodong.Location = new System.Drawing.Point(96, 3);
+            this.btnHopdonglaodong.Location = new System.Drawing.Point(91, 3);
             this.btnHopdonglaodong.Name = "btnHopdonglaodong";
-            this.btnHopdonglaodong.Size = new System.Drawing.Size(88, 64);
+            this.btnHopdonglaodong.Size = new System.Drawing.Size(83, 64);
             this.btnHopdonglaodong.TabIndex = 1;
             this.btnHopdonglaodong.Text = "Hợp đồng lao động";
             this.btnHopdonglaodong.UseVisualStyleBackColor = true;

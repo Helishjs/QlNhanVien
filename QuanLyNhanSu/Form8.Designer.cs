@@ -72,7 +72,7 @@
             this.flowLayoutPanel1.Location = new System.Drawing.Point(2, 0);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(132, 447);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(132, 559);
             this.flowLayoutPanel1.TabIndex = 2;
             // 
             // DSNV
@@ -175,17 +175,18 @@
             this.panel1.Location = new System.Drawing.Point(133, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(603, 448);
+            this.panel1.Size = new System.Drawing.Size(851, 560);
             this.panel1.TabIndex = 3;
             // 
             // Form8
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(736, 449);
+            this.ClientSize = new System.Drawing.Size(984, 561);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.panel1);
             this.Name = "Form8";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form8";
             this.Load += new System.EventHandler(this.Form8_Load);
             this.flowLayoutPanel1.ResumeLayout(false);

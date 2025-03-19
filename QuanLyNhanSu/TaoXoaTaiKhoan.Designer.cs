@@ -53,7 +53,7 @@
             this.HoTenTB = new System.Windows.Forms.TextBox();
             this.NgaySinh = new System.Windows.Forms.Label();
             this.HoTen = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.NgaySinhDT = new System.Windows.Forms.DateTimePicker();
             this.TaoTK = new System.Windows.Forms.Button();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -92,7 +92,7 @@
             this.BaoHiemCB.Items.AddRange(new object[] {
             "Có",
             "Không"});
-            this.BaoHiemCB.Location = new System.Drawing.Point(131, 100);
+            this.BaoHiemCB.Location = new System.Drawing.Point(131, 99);
             this.BaoHiemCB.Margin = new System.Windows.Forms.Padding(2);
             this.BaoHiemCB.Name = "BaoHiemCB";
             this.BaoHiemCB.Size = new System.Drawing.Size(122, 30);
@@ -108,7 +108,7 @@
             "Tài Chính",
             "Nhân Sự",
             "Quản Lý"});
-            this.PhongBanCB.Location = new System.Drawing.Point(131, 54);
+            this.PhongBanCB.Location = new System.Drawing.Point(131, 53);
             this.PhongBanCB.Margin = new System.Windows.Forms.Padding(2);
             this.PhongBanCB.Name = "PhongBanCB";
             this.PhongBanCB.Size = new System.Drawing.Size(122, 30);
@@ -124,7 +124,7 @@
             "Nhân Viên Thường",
             "Nghiệp Vụ",
             "Nhân Viên Nghỉ"});
-            this.ChucVuCB.Location = new System.Drawing.Point(131, 8);
+            this.ChucVuCB.Location = new System.Drawing.Point(131, 7);
             this.ChucVuCB.Margin = new System.Windows.Forms.Padding(2);
             this.ChucVuCB.Name = "ChucVuCB";
             this.ChucVuCB.Size = new System.Drawing.Size(122, 30);
@@ -138,7 +138,7 @@
             this.TroCapCB.Items.AddRange(new object[] {
             "Có",
             "Không"});
-            this.TroCapCB.Location = new System.Drawing.Point(131, 146);
+            this.TroCapCB.Location = new System.Drawing.Point(131, 145);
             this.TroCapCB.Margin = new System.Windows.Forms.Padding(2);
             this.TroCapCB.Name = "TroCapCB";
             this.TroCapCB.Size = new System.Drawing.Size(122, 30);
@@ -213,7 +213,7 @@
             this.tableLayoutPanel1.Controls.Add(this.HoTenTB, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.NgaySinh, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.HoTen, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.dateTimePicker1, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.NgaySinhDT, 1, 1);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(20, 43);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -238,7 +238,7 @@
             this.GioiTinhCB.Items.AddRange(new object[] {
             "Nam",
             "Nữ"});
-            this.GioiTinhCB.Location = new System.Drawing.Point(147, 97);
+            this.GioiTinhCB.Location = new System.Drawing.Point(147, 96);
             this.GioiTinhCB.Margin = new System.Windows.Forms.Padding(2);
             this.GioiTinhCB.Name = "GioiTinhCB";
             this.GioiTinhCB.Size = new System.Drawing.Size(141, 30);
@@ -400,17 +400,17 @@
             this.HoTen.TabIndex = 1;
             this.HoTen.Text = "Họ Và Tên:";
             // 
-            // dateTimePicker1
+            // NgaySinhDT
             // 
-            this.dateTimePicker1.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePicker1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dateTimePicker1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker1.Location = new System.Drawing.Point(147, 47);
-            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(2);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(141, 28);
-            this.dateTimePicker1.TabIndex = 22;
+            this.NgaySinhDT.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NgaySinhDT.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.NgaySinhDT.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NgaySinhDT.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.NgaySinhDT.Location = new System.Drawing.Point(147, 47);
+            this.NgaySinhDT.Margin = new System.Windows.Forms.Padding(2);
+            this.NgaySinhDT.Name = "NgaySinhDT";
+            this.NgaySinhDT.Size = new System.Drawing.Size(141, 28);
+            this.NgaySinhDT.TabIndex = 22;
             // 
             // TaoTK
             // 
@@ -435,6 +435,7 @@
             this.Controls.Add(this.TaoTK);
             this.Name = "TaoXoaTaiKhoan";
             this.Size = new System.Drawing.Size(603, 448);
+            this.Load += new System.EventHandler(this.TaoXoaTaiKhoan_Load);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -470,7 +471,7 @@
         private System.Windows.Forms.TextBox HoTenTB;
         private System.Windows.Forms.Label NgaySinh;
         private System.Windows.Forms.Label HoTen;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker NgaySinhDT;
         private System.Windows.Forms.Button TaoTK;
     }
 }

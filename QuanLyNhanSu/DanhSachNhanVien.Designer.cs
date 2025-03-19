@@ -34,18 +34,13 @@
             this.ChinhSua = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.Okkk = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.HoTen = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SoDT = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.GioiTinh = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PhongBan = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ChucVu = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ChuotPhai = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.chỉnhSửaÔToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.xemThôngTinChiTiếtNhânViênToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.OThayDoi.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.ChuotPhai.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // OThayDoi
@@ -112,63 +107,6 @@
             this.Okkk.UseVisualStyleBackColor = false;
             this.Okkk.Click += new System.EventHandler(this.Okkk_Click);
             // 
-            // dataGridView1
-            // 
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.HoTen,
-            this.SoDT,
-            this.GioiTinh,
-            this.PhongBan,
-            this.ChucVu});
-            this.dataGridView1.Location = new System.Drawing.Point(12, 19);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(2);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(578, 410);
-            this.dataGridView1.TabIndex = 5;
-            // 
-            // HoTen
-            // 
-            this.HoTen.HeaderText = "Họ Tên";
-            this.HoTen.MinimumWidth = 6;
-            this.HoTen.Name = "HoTen";
-            this.HoTen.ReadOnly = true;
-            // 
-            // SoDT
-            // 
-            this.SoDT.HeaderText = "Số Điện Thoại";
-            this.SoDT.MinimumWidth = 6;
-            this.SoDT.Name = "SoDT";
-            this.SoDT.ReadOnly = true;
-            // 
-            // GioiTinh
-            // 
-            this.GioiTinh.HeaderText = "Giới Tính";
-            this.GioiTinh.MinimumWidth = 6;
-            this.GioiTinh.Name = "GioiTinh";
-            this.GioiTinh.ReadOnly = true;
-            // 
-            // PhongBan
-            // 
-            this.PhongBan.HeaderText = "Phòng Ban";
-            this.PhongBan.MinimumWidth = 6;
-            this.PhongBan.Name = "PhongBan";
-            this.PhongBan.ReadOnly = true;
-            // 
-            // ChucVu
-            // 
-            this.ChucVu.HeaderText = "Chức Vụ";
-            this.ChucVu.MinimumWidth = 6;
-            this.ChucVu.Name = "ChucVu";
-            this.ChucVu.ReadOnly = true;
-            // 
             // ChuotPhai
             // 
             this.ChuotPhai.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -192,6 +130,16 @@
             this.xemThôngTinChiTiếtNhânViênToolStripMenuItem.Text = "Xem Thông Tin Chi Tiết Nhân Viên";
             this.xemThôngTinChiTiếtNhânViênToolStripMenuItem.Click += new System.EventHandler(this.xemThôngTinChiTiếtNhânViênToolStripMenuItem_Click);
             // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(1000, 600);
+            this.dataGridView1.TabIndex = 7;
+            // 
             // DanhSachNhanVien
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -199,12 +147,12 @@
             this.Controls.Add(this.OThayDoi);
             this.Controls.Add(this.dataGridView1);
             this.Name = "DanhSachNhanVien";
-            this.Size = new System.Drawing.Size(603, 448);
+            this.Size = new System.Drawing.Size(1000, 600);
             this.Load += new System.EventHandler(this.DanhSachNhanVien_Load);
             this.OThayDoi.ResumeLayout(false);
             this.OThayDoi.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ChuotPhai.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -216,14 +164,9 @@
         private System.Windows.Forms.TextBox ChinhSua;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button Okkk;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn HoTen;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SoDT;
-        private System.Windows.Forms.DataGridViewTextBoxColumn GioiTinh;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PhongBan;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ChucVu;
         private System.Windows.Forms.ContextMenuStrip ChuotPhai;
         private System.Windows.Forms.ToolStripMenuItem chỉnhSửaÔToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem xemThôngTinChiTiếtNhânViênToolStripMenuItem;
+        private System.Windows.Forms.DataGridView dataGridView1;
     }
 }

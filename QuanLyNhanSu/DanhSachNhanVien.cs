@@ -15,7 +15,6 @@ namespace QuanLyNhanSu
 {
     public partial class DanhSachNhanVien : UserControl
     {
-        string sqlstring = @"Data Source=DESKTOP-B4J24OU\MSSQLSERVER01;Initial Catalog=QLNhanVien;Integrated Security=True;TrustServerCertificate=True";
         int _Row, _Col;
 
         public event EventHandler<int> LayMaNhanVien;
@@ -30,27 +29,26 @@ namespace QuanLyNhanSu
         }
         public void CapNhat(DataTable dt)
         {
-            dataGridView1.Rows.Clear();
-            foreach (DataRow row in _dt.Rows)
-            {
-                dataGridView1.Rows.Add(row["NhanVien.HoTen"], row["Số Điện Thoại"], row["Giới Tính"], row["Phòng Ban"], row["Chức Vụ"]);
-            }
+            //dataGridView1.Rows.Clear();
+            //foreach (DataRow row in _dt.Rows)
+            //{
+            //    dataGridView1.Rows.Add(row["NhanVien.HoTen"], row["Số Điện Thoại"], row["Giới Tính"], row["Phòng Ban"], row["Chức Vụ"]);
+            //}
         }
         public void TaoXoaTaiKhoan_DataChanged(object sender, EventArgs e)
         {
-            CapNhat(_dt);
-            dataGridView1.Refresh();
+            GetNhanVien nv = new GetNhanVien();
+            nv.LoadNhanVien(dataGridView1);
         }
         public void QuanLyNhanSu_DataChanged(object sender, EventArgs e)
         {
-            CapNhat(_dt);
-            dataGridView1.Refresh();
+            GetNhanVien nv = new GetNhanVien();
+            nv.LoadNhanVien(dataGridView1);
         }
         public void QuanLyNhanTu_XoaData(object sender, EventArgs e)
         {
-            _dt.Rows.RemoveAt(_Row);
-            CapNhat(_dt);
-            dataGridView1.Refresh();
+            GetNhanVien nv = new GetNhanVien();
+            nv.LoadNhanVien(dataGridView1);
         }
         public void ListenToDataChanged(TaoXoaTaiKhoan taoxoataikhoan)
         {
@@ -102,9 +100,9 @@ namespace QuanLyNhanSu
 
         private void xemThôngTinChiTiếtNhânViênToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            HienThiQLNV?.Invoke(this, EventArgs.Empty);
             int MaDaLay = _Row;
             LayMaNhanVien?.Invoke(this, MaDaLay);
+            HienThiQLNV?.Invoke(this, EventArgs.Empty);
         }
 
         private void Okkk_Click(object sender, EventArgs e)
@@ -118,24 +116,8 @@ namespace QuanLyNhanSu
 
         private void DanhSachNhanVien_Load(object sender, EventArgs e)
         {
-            using (SqlConnection sqlconnect = new SqlConnection(sqlstring))
-            {
-                sqlconnect.Open();
-                string query = @"SELECT NhanVien.ID_NhanVien, NhanVien.HoTen, NhanVien.NgaySinh, 
-                        NhanVien.GioiTinh, NhanVien.QueQuan, NhanVien.Email, 
-                        NhanVien.SDT, NhanVien.SoCCCD, NhanVien.DiaChi, 
-                        ChucVu.Ten_ChucVu, PhongBan.Ten_PhongBan 
-                 FROM NhanVien 
-                 JOIN ChucVu ON ChucVu.ID_ChucVu = NhanVien.ID_ChucVu 
-                 JOIN PhongBan ON PhongBan.ID_PhongBan = NhanVien.ID_PhongBan";
-
-                SqlDataAdapter adapter = new SqlDataAdapter(query, sqlconnect);
-                DataTable dt = new DataTable();
-                adapter.Fill(dt);
-
-                // Gán dữ liệu vào DataGridView
-                dataGridView1.DataSource = dt;  
-            }
+            GetNhanVien nv = new GetNhanVien();
+            nv.LoadNhanVien(dataGridView1);
         }
 
         protected virtual void On_DataChanged()

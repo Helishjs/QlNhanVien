@@ -35,14 +35,10 @@ namespace QuanLyNhanSu
 
         }
 
-        private void btnQuanlinhanvien_Click(object sender, EventArgs e)
-        {
 
-        }
 
         private void btnLogin_Click(object sender, EventArgs e)
         {   
-            //tao loi dan ham dang nhap
             this.Hide();
             using(FormLogin login = new FormLogin())
             {
@@ -57,14 +53,10 @@ namespace QuanLyNhanSu
 
         private void btnDoithongtin_Click(object sender, EventArgs e)
         {
-            //gọi form đổi mật khẩu
             this.Hide();
             using (FormChangePassword changePassword = new FormChangePassword())
             {
-                if (changePassword.ShowDialog() == DialogResult.OK)
-                {
-                    MessageBox.Show("Đăng nhập thành công");
-                }
+                changePassword.ShowDialog();
             }
             this.Show();
 
@@ -128,75 +120,15 @@ namespace QuanLyNhanSu
 
         private void btnSua_Click(object sender, EventArgs e)
         {
-            if (dataGridViewNhanVien.SelectedRows.Count > 0)
-            {
-                DataGridViewRow row = dataGridViewNhanVien.SelectedRows[0];
-
-                string id = row.Cells["ID_NhanVien"].Value.ToString();
-                string hoTen = row.Cells["HoTen"].Value.ToString();
-                DateTime ngaySinh = Convert.ToDateTime(row.Cells["NgaySinh"].Value);
-                string gioiTinh = row.Cells["GioiTinh"].Value.ToString();
-                string queQuan = row.Cells["QueQuan"].Value.ToString();
-                string email = row.Cells["Email"].Value.ToString();
-                string sdt = row.Cells["SDT"].Value.ToString();
-                string soCCCD = row.Cells["SoCCCD"].Value.ToString();
-                string diaChi = row.Cells["DiaChi"].Value.ToString();
-                string phongBan = row.Cells["Ten_PhongBan"].Value.ToString();
-                string chucVu = row.Cells["Ten_ChucVu"].Value.ToString();
-
-                this.Hide();
-
-                using (FormSuaNhanVien suaNhanVien = new FormSuaNhanVien(id, hoTen, ngaySinh, gioiTinh,
-                                                                         queQuan, email, sdt, soCCCD, diaChi, phongBan, chucVu))
-                {
-                    suaNhanVien.ShowDialog();
-                }
-                this.Show();
-            }
-            else
-            {
-                MessageBox.Show("Vui lòng chọn nhân viên cần sửa!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
+            GetNhanVien nv = new GetNhanVien();
+            nv.SuaNhaVien(dataGridViewNhanVien);
         }
 
         private void btnXoa_Click(object sender, EventArgs e)
         {
-            if(dataGridViewNhanVien.SelectedRows.Count > 0)
-            {
-                DataGridViewRow row = dataGridViewNhanVien.SelectedRows[0];
-                string id = row.Cells["ID_NhanVien"].Value.ToString();
 
-                try
-                {
-                    using (SqlConnection sqlconnect = new SqlConnection(sqlString))
-                    {
-                        sqlconnect.Open();
-                        string query = "DELETE FROM NhanVien WHERE NhanVien.ID_NhanVien = @id";
-                        using(SqlCommand cmd = new SqlCommand(query, sqlconnect))
-                        {
-                            cmd.Parameters.AddWithValue("@id", id);
-                            int check = cmd.ExecuteNonQuery();
-                            if(check > 0)
-                            {
-                              DialogResult result =  MessageBox.Show("Bạn có muốn xóa thông tin nhân viên này không? ","Xác nhận xóa", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                                if(result == DialogResult.Yes)
-                                {
-                                    MessageBox.Show("Đã xóa thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                    GetNhanVien nv = new GetNhanVien();
-                                    nv.LoadNhanVien(dataGridViewNhanVien);
-                                }
-                            }
-                            else
-                            {
-                                MessageBox.Show("Chọn nhân viên cần xóa");
-                            }
-                        }
-                    }
-                }catch(Exception ex)
-                {
-                    MessageBox.Show("Có lỗi: " + ex);
-                }
-            }
+            GetNhanVien nv = new GetNhanVien();
+            nv.XoaNhanVien(dataGridViewNhanVien);
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
