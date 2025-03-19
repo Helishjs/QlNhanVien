@@ -22,10 +22,8 @@ D:\Documents\winform\QuanLyNhanSu\QuanLyNhanSu\obj\Debug\QuanLyNhanSu.Form16.res
 D:\Documents\winform\QuanLyNhanSu\QuanLyNhanSu\obj\Debug\QuanLyNhanSu.Form17.resources
 D:\Documents\winform\QuanLyNhanSu\QuanLyNhanSu\obj\Debug\QuanLyNhanSu.Form18.resources
 D:\Documents\winform\QuanLyNhanSu\QuanLyNhanSu\obj\Debug\QuanLyNhanSu.Form19.resources
-D:\Documents\winform\QuanLyNhanSu\QuanLyNhanSu\obj\Debug\QuanLyNhanSu.Form2.resources
 D:\Documents\winform\QuanLyNhanSu\QuanLyNhanSu\obj\Debug\QuanLyNhanSu.Form20.resources
 D:\Documents\winform\QuanLyNhanSu\QuanLyNhanSu\obj\Debug\QuanLyNhanSu.Form3.resources
-D:\Documents\winform\QuanLyNhanSu\QuanLyNhanSu\obj\Debug\QuanLyNhanSu.Form4.resources
 D:\Documents\winform\QuanLyNhanSu\QuanLyNhanSu\obj\Debug\QuanLyNhanSu.Form5.resources
 D:\Documents\winform\QuanLyNhanSu\QuanLyNhanSu\obj\Debug\QuanLyNhanSu.Form6.resources
 D:\Documents\winform\QuanLyNhanSu\QuanLyNhanSu\obj\Debug\QuanLyNhanSu.Form7.resources
@@ -35,3 +33,5 @@ D:\Documents\winform\QuanLyNhanSu\QuanLyNhanSu\obj\Debug\QuanLyNhanSu.DanhSachNh
 D:\Documents\winform\QuanLyNhanSu\QuanLyNhanSu\obj\Debug\QuanLyNhanSu.ManHinhChao.resources
 D:\Documents\winform\QuanLyNhanSu\QuanLyNhanSu\obj\Debug\QuanLyNhanSu.TaoXoaTaiKhoan.resources
 D:\Documents\winform\QuanLyNhanSu\QuanLyNhanSu\obj\Debug\QuanLyNhanSu.QuanLyNhanSu1.resources
+D:\Documents\winform\QuanLyNhanSu\QuanLyNhanSu\obj\Debug\QuanLyNhanSu.FormAdminHomePage.resources
+D:\Documents\winform\QuanLyNhanSu\QuanLyNhanSu\obj\Debug\QuanLyNhanSu.FormXemBangLuong.resources

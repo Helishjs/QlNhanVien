@@ -10,16 +10,54 @@ using System.Windows.Forms;
 
 namespace QuanLyNhanSu
 {
-    public partial class Form2: Form
+    public partial class FormAdminHomePage: Form
     {
-        public Form2()
+        public FormAdminHomePage()
         {
             InitializeComponent();
         }
-
-        private void button1_Click(object sender, EventArgs e)
+        private Form currentchildForm;
+        private void OpenChildForm(Form children)
         {
+            if (currentchildForm != null)
+            {
+                currentchildForm.Close();               
+            }
+            currentchildForm = children;
+            children.TopLevel = false;
+            children.FormBorderStyle = FormBorderStyle.None;
+            children.Dock = DockStyle.Fill;
+            panel3.Controls.Add(children);
+            panel3.Tag = children;
+            children.BringToFront();
+            children.Show();
+        }
 
+        private void bangluong_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new FormXemBangLuong());
+            label1.Text = "BẢNG LƯƠNG";
+        }
+
+        private void loi_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new Form5());
+            label1.Text = "TRA CỨU LỖI";
+        }
+
+        private void khen_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new Form6());
+            label1.Text = "TRA CỨU THƯỞNG";
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (currentchildForm != null)
+            {
+                currentchildForm.Close();
+            }
+            label1.Text = "ADMIN HOME";
         }
     }
 }

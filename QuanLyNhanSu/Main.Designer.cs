@@ -194,7 +194,7 @@
             this.tableLayoutPanel1.Controls.Add(this.btnChamCong, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.btnTangCa, 3, 0);
             this.tableLayoutPanel1.Controls.Add(this.btnNghiViec, 1, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(278, 3);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(279, 3);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -227,6 +227,7 @@
             this.btnTangCa.TabIndex = 5;
             this.btnTangCa.Text = "Đăng kí tăng ca";
             this.btnTangCa.UseVisualStyleBackColor = true;
+            this.btnTangCa.Click += new System.EventHandler(this.btnTangCa_Click);
             // 
             // btnNghiViec
             // 
@@ -244,7 +245,7 @@
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel3.Controls.Add(this.btnBaoHiem, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.btnHopdonglaodong, 1, 0);
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(553, 3);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(555, 3);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));

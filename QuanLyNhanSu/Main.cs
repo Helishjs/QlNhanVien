@@ -174,5 +174,15 @@ namespace QuanLyNhanSu
             }
             this.Show();
         }
+
+        private void btnTangCa_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            using(FormAdminHomePage form = new FormAdminHomePage())
+            {
+                form.ShowDialog();
+            }
+            this.Show();
+        }
     }
 }

@@ -153,7 +153,6 @@ namespace QuanLyNhanSu
             SDTTB.ReadOnly = true;
             DiaChiTB.ReadOnly = true;
             EmailTB.ReadOnly = true;
-x
             HoTenTB.Text = row["HoTen"].ToString();
             NgaySinhTB.Text = row["NgaySinh"] != DBNull.Value ? ((DateTime)row["NgaySinh"]).ToShortDateString() : "";
             GioiTinhTB.Text = row["GioiTinh"].ToString();
