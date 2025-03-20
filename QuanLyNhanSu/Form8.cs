@@ -36,7 +36,7 @@ namespace QuanLyNhanSu
             QuanLynhansu.Dock = DockStyle.Fill;
             taoXoaTaikhoan.Dock = DockStyle.Fill;
 
-            QuanLynhansu.SetDataTable(dt);
+            //QuanLynhansu.SetDataTable(dt);
             taoXoaTaikhoan.SetDataTable(dt);
             DanhSach.SetDataTable1(dt);
 
@@ -73,7 +73,11 @@ namespace QuanLyNhanSu
                 }
             }
             else
+            {
                 QuanLynhansu.BringToFront();
+                NhanVienDuocChon = -1;
+            }
+                
         }
 
         private void TKNV_Click(object sender, EventArgs e)
@@ -85,7 +89,7 @@ namespace QuanLyNhanSu
         {
             NhanVienDuocChon = newValue;
             QuanLynhansu.QuanLyMa(NhanVienDuocChon);
-            NhanVienDuocChon = -1;
+            QuanLynhansu.BringToFront();
         }
 
         private void Form8_Load(object sender, EventArgs e)

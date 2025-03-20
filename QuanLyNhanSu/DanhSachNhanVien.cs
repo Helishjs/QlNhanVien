@@ -78,7 +78,7 @@ namespace QuanLyNhanSu
                 dataGridView1.ClearSelection();
                 dataGridView1.Rows[e.RowIndex].Selected = true;
 
-                _Row = e.RowIndex;
+                _Row = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["ID_NhanVien"].Value);
                 _Col = e.ColumnIndex;
 
                 ChuotPhai.Show(dataGridView1, dataGridView1.PointToClient(Cursor.Position));
@@ -100,7 +100,7 @@ namespace QuanLyNhanSu
 
         private void xemThôngTinChiTiếtNhânViênToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int MaDaLay = _Row;
+            int MaDaLay =_Row ;
             LayMaNhanVien?.Invoke(this, MaDaLay);
             HienThiQLNV?.Invoke(this, EventArgs.Empty);
         }

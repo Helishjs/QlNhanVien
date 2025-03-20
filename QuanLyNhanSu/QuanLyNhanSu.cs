@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Security.Permissions;
+using System.Data.SqlClient;
 
 namespace QuanLyNhanSu
 {
@@ -17,12 +18,27 @@ namespace QuanLyNhanSu
         public event EventHandler DataChangedFix;
         public event EventHandler DataDelete;
         public event EventHandler HienThiDanhSach;
-        private DataTable _dt;
+        private DataTable _dt = new DataTable();
         private int manhanvien = -1;
-
+        DataRow[] rows;
+        string sqlstring = @"Data Source=DESKTOP-B4J24OU\MSSQLSERVER01;Initial Catalog=QLNhanVien;Integrated Security=True;TrustServerCertificate=True";
         public QuanLyNhanSu1()
         {
             InitializeComponent();
+            using(SqlConnection sqlconnect = new SqlConnection(sqlstring))
+            {
+                sqlconnect.Open();
+                string query = @"SELECT NhanVien.ID_NhanVien, NhanVien.HoTen, NhanVien.NgaySinh, 
+                        NhanVien.GioiTinh, NhanVien.QueQuan, NhanVien.Email, 
+                        NhanVien.SDT, NhanVien.SoCCCD, NhanVien.DiaChi, 
+                        ChucVu.Ten_ChucVu, PhongBan.Ten_PhongBan 
+                 FROM NhanVien 
+                 JOIN ChucVu ON ChucVu.ID_ChucVu = NhanVien.ID_ChucVu 
+                 JOIN PhongBan ON PhongBan.ID_PhongBan = NhanVien.ID_PhongBan";
+                SqlDataAdapter adapter = new SqlDataAdapter(query, sqlconnect);
+                adapter.Fill(_dt);
+
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -42,26 +58,26 @@ namespace QuanLyNhanSu
             tableLayoutPanel1.Controls.Remove(NgaySinhTB);
             tableLayoutPanel1.Controls.Add(NgaySinhChoose, 1, 1);
         }
-        public void SetDataTable(DataTable dt)
+        /*public void SetDataTable(DataTable dt)
         {
             _dt = dt;
-        }
+        }*/
 
         public void CapNhatQuanLy(DataTable dt)
         {
             if (manhanvien == -1) return;
-            dt.Rows[manhanvien]["Họ Tên"] = HoTenTB.Text;
-            dt.Rows[manhanvien]["Ngày Sinh"] = NgaySinhChoose.Value;
-            dt.Rows[manhanvien]["Giới Tính"] = GioiTinhCB.SelectedItem.ToString();
-            dt.Rows[manhanvien]["Quê Quán"] = QueQuanTB.Text;
-            dt.Rows[manhanvien]["CCCD"] = CCCDTB.Text;
-            dt.Rows[manhanvien]["Số Điện Thoại"] = SDTTB.Text;
-            dt.Rows[manhanvien]["Địa Chỉ"] = DiaChiTB.Text;
-            dt.Rows[manhanvien]["Email"] = EmailTB.Text;
-            dt.Rows[manhanvien]["Chức Vụ"] = ChucVuCB.SelectedItem.ToString();
-            dt.Rows[manhanvien]["Phòng Ban"] = PhongBanCB.SelectedItem.ToString();
-            dt.Rows[manhanvien]["Bảo Hiểm"] = BaoHiemCB.SelectedItem.ToString();
-            dt.Rows[manhanvien]["Trợ Cấp"] = TroCapCB.SelectedItem.ToString();
+            row["HoTen"] = HoTenTB.Text;
+            row["NgaySinh"] = NgaySinhChoose.Value;
+            row["GioiTinh"] = GioiTinhCB.SelectedItem.ToString();
+            row["QueQuan"] = QueQuanTB.Text;
+            row["SoCCCD"] = CCCDTB.Text;
+            row["SDT"] = SDTTB.Text;
+            row["DiaChi"] = DiaChiTB.Text;
+            row["Email"] = EmailTB.Text;
+            row["Ten_ChucVu"] = ChucVuCB.SelectedItem.ToString();
+            row["Ten_PhongBan"] = PhongBanCB.SelectedItem.ToString();
+            row["BaoHiem"] = BaoHiemCB.SelectedItem.ToString();
+            row["TroCap"] = TroCapCB.SelectedItem.ToString();
         }
         public void CapNhat_Click(object sender, EventArgs e)
         {
@@ -124,57 +140,44 @@ namespace QuanLyNhanSu
             manhanvien = _manhanvien;
             HienThiThongTinCaNhan();
         }
-
+        DataRow row;
         public void HienThiThongTinCaNhan()
         {
-            // Kiểm tra nếu DataTable không có dữ liệu
-            if (_dt == null || _dt.Rows.Count == 0)
+
+            DataRow[] rows = _dt.Select($"ID_NhanVien = {manhanvien}");
+            //MessageBox.Show("ID = " + manhanvien);
+
+            if (rows.Length > 0)
             {
-                MessageBox.Show("Không có dữ liệu nhân viên.");
-                return;
+                row = rows[0]; // Lấy dòng đầu tiên nếu tìm thấy
+                HoTenTB.ReadOnly = true;
+                QueQuanTB.ReadOnly = true;
+                CCCDTB.ReadOnly = true;
+                SDTTB.ReadOnly = true;
+                DiaChiTB.ReadOnly = true;
+                EmailTB.ReadOnly = true;
+
+                HoTenTB.Text = row["HoTen"].ToString();
+                NgaySinhTB.Text = row["NgaySinh"] != DBNull.Value ? ((DateTime)row["NgaySinh"]).ToShortDateString() : "";
+                GioiTinhTB.Text = row["GioiTinh"].ToString();
+                QueQuanTB.Text = row["QueQuan"].ToString();
+                CCCDTB.Text = row["SoCCCD"].ToString();
+                SDTTB.Text = row["SDT"].ToString();
+                DiaChiTB.Text = row["DiaChi"].ToString();
+                EmailTB.Text = row["Email"].ToString();
+                ChucVuTB.Text = row["Ten_ChucVu"].ToString();
+                PhongBanTB.Text = row["Ten_PhongBan"].ToString();
+
+                if (_dt.Columns.Contains("BaoHiem"))
+                    BaoHiemTB.Text = row["BaoHiem"].ToString();
+                if (_dt.Columns.Contains("TroCap"))
+                    TroCapTB.Text = row["TroCap"].ToString();
+            }
+            else
+            {
+                MessageBox.Show("Không tìm thấy nhân viên với ID: " + manhanvien, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            // Tìm dòng chứa nhân viên có ID tương ứng
-            DataRow[] rows = _dt.Select($"ID_NhanVien = ");
-
-            // Kiểm tra xem có tìm thấy nhân viên không
-            if (rows.Length == 0)
-            {
-                MessageBox.Show("Không tìm thấy thông tin nhân viên.");
-                return;
-            }
-
-            DataRow row = rows[0]; // Lấy dòng đầu tiên tìm được
-
-
-            HoTenTB.ReadOnly = true;
-            QueQuanTB.ReadOnly = true;
-            CCCDTB.ReadOnly = true;
-            SDTTB.ReadOnly = true;
-            DiaChiTB.ReadOnly = true;
-            EmailTB.ReadOnly = true;
-            HoTenTB.Text = row["HoTen"].ToString();
-            NgaySinhTB.Text = row["NgaySinh"] != DBNull.Value ? ((DateTime)row["NgaySinh"]).ToShortDateString() : "";
-            GioiTinhTB.Text = row["GioiTinh"].ToString();
-            QueQuanTB.Text = row["QueQuan"].ToString();
-            CCCDTB.Text = row["CCCD"].ToString();
-            SDTTB.Text = row["SDT"].ToString();
-            DiaChiTB.Text = row["DiaChi"].ToString();
-            EmailTB.Text = row["Email"].ToString();
-            ChucVuTB.Text = row["Ten_ChucVu"].ToString();
-            PhongBanTB.Text = row["Ten_PhongBan"].ToString();
-
-
-            if (_dt.Columns.Contains("BaoHiem"))
-                BaoHiemTB.Text = row["BaoHiem"].ToString();
-            if (_dt.Columns.Contains("TroCap"))
-                TroCapTB.Text = row["TroCap"].ToString();
-
-            GioiTinhCB.Text = GioiTinhTB.Text;
-            ChucVuCB.Text = ChucVuTB.Text;
-            PhongBanCB.Text = PhongBanTB.Text;
-            BaoHiemCB.Text = BaoHiemTB.Text;
-            TroCapCB.Text = TroCapTB.Text;
         }
         protected virtual void OnDataChanged()
         {
