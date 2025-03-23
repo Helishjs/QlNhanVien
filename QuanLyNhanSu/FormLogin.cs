@@ -40,7 +40,6 @@ namespace QuanLyNhanSu
                 tbpassword.Visible = false;
                 lblpassword.Visible = false;
                 btnressetpassword.Visible = false;
-                checkBox1.Visible = false;
                 tbcccd.Visible = true;
                 lblcccd.Visible = true;
                 btnlogin.Text = "Reset";
@@ -62,7 +61,6 @@ namespace QuanLyNhanSu
                 tbpassword.Visible = true;
                 lblpassword.Visible = true;
                 btnressetpassword.Visible = true;
-                checkBox1.Visible = true;
                 tbcccd.Visible = false;
                 lblcccd.Visible = false;
                 btnlogin.Text = "Đăng nhập";
@@ -124,9 +122,7 @@ namespace QuanLyNhanSu
                                     {
                                         User.ID_NhanVien = reader.GetInt32(0);
                                         User.Username = username;
-                                        User.Role = reader.IsDBNull(1) ? "User" : reader.GetString(1); // Role (nếu NULL thì mặc định là "User")
-
-                                        // Kiểm tra NULL trước khi đọc dữ liệu
+                                        User.Role = reader.IsDBNull(1) ? "User" : reader.GetString(1);
                                         User.CCCD = reader.IsDBNull(2) ? "Không có CCCD" : reader.GetString(2);
                                         User.NgaySinh = reader.IsDBNull(3) ? DateTime.MinValue : reader.GetDateTime(3);
                                         User.GioiTinh = reader.IsDBNull(4) ? "Không xác định" : reader.GetString(4);
@@ -139,8 +135,10 @@ namespace QuanLyNhanSu
                                         User.HoTen = reader.GetString(11);
 
                                         User.Password = password;
-
+                                        MessageBox.Show("Đăng nhập thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                        User.IsLoggedOut = false;
                                         this.DialogResult = DialogResult.OK;
+
                                         this.Close();
                                     }
                                     else

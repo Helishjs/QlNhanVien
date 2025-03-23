@@ -25,11 +25,11 @@ namespace QuanLyNhanSu
 
                 if (User.Role == "admin")
                 {
-                    mainForm = new Form8();  // Admin form
+                    mainForm = new FormAdminHomePage();  // Admin form
                 }
                 else
                 {
-                    mainForm = new MainForm();  // User form
+                    mainForm = new FormUser(User.ID_NhanVien);  // User form
                 }
 
                 Application.Run(mainForm);

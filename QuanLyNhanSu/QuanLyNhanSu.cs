@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Security.Permissions;
 using System.Data.SqlClient;
+using System.Data.SqlTypes;
+using System.Runtime.CompilerServices;
 
 namespace QuanLyNhanSu
 {
@@ -18,6 +20,8 @@ namespace QuanLyNhanSu
         public event EventHandler DataChangedFix;
         public event EventHandler DataDelete;
         public event EventHandler HienThiDanhSach;
+        public event EventHandler LoadDanhSach;
+
         private DataTable _dt = new DataTable();
         private int manhanvien = -1;
         DataRow[] rows;
@@ -25,16 +29,18 @@ namespace QuanLyNhanSu
         public QuanLyNhanSu1()
         {
             InitializeComponent();
-            using(SqlConnection sqlconnect = new SqlConnection(sqlstring))
+            using (SqlConnection sqlconnect = new SqlConnection(sqlstring))
             {
                 sqlconnect.Open();
                 string query = @"SELECT NhanVien.ID_NhanVien, NhanVien.HoTen, NhanVien.NgaySinh, 
                         NhanVien.GioiTinh, NhanVien.QueQuan, NhanVien.Email, 
                         NhanVien.SDT, NhanVien.SoCCCD, NhanVien.DiaChi, 
-                        ChucVu.Ten_ChucVu, PhongBan.Ten_PhongBan 
+                        ChucVu.Ten_ChucVu, PhongBan.Ten_PhongBan,BaoHiem.LoaiBaoHiem,TroCap.LoaiTroCap
                  FROM NhanVien 
                  JOIN ChucVu ON ChucVu.ID_ChucVu = NhanVien.ID_ChucVu 
-                 JOIN PhongBan ON PhongBan.ID_PhongBan = NhanVien.ID_PhongBan";
+                 JOIN PhongBan ON PhongBan.ID_PhongBan = NhanVien.ID_PhongBan
+                 JOIN TroCap ON TroCap.ID_TroCap = NhanVien.ID_TroCap
+                 JOIN BaoHiem ON BaoHiem.ID_BaoHiem = NhanVien.ID_BaoHiem";
                 SqlDataAdapter adapter = new SqlDataAdapter(query, sqlconnect);
                 adapter.Fill(_dt);
 
@@ -44,6 +50,14 @@ namespace QuanLyNhanSu
         private void button1_Click(object sender, EventArgs e)
         {
             CapNhat.BringToFront();
+            QueQuanTB.ReadOnly = false;
+            CCCDTB.ReadOnly = false;
+            SDTTB.ReadOnly = false;
+            DiaChiTB.ReadOnly = false;
+            EmailTB.ReadOnly = false;
+
+            GioiTinhCB.SelectedItem = "Nam";
+
             XoaTK.Visible = false;
             tableLayoutPanel2.Controls.Remove(ChucVuTB);
             tableLayoutPanel2.Controls.Add(ChucVuCB, 1, 0);
@@ -58,34 +72,17 @@ namespace QuanLyNhanSu
             tableLayoutPanel1.Controls.Remove(NgaySinhTB);
             tableLayoutPanel1.Controls.Add(NgaySinhChoose, 1, 1);
         }
-        /*public void SetDataTable(DataTable dt)
-        {
-            _dt = dt;
-        }*/
-
-        public void CapNhatQuanLy(DataTable dt)
-        {
-            if (manhanvien == -1) return;
-            row["HoTen"] = HoTenTB.Text;
-            row["NgaySinh"] = NgaySinhChoose.Value;
-            row["GioiTinh"] = GioiTinhCB.SelectedItem.ToString();
-            row["QueQuan"] = QueQuanTB.Text;
-            row["SoCCCD"] = CCCDTB.Text;
-            row["SDT"] = SDTTB.Text;
-            row["DiaChi"] = DiaChiTB.Text;
-            row["Email"] = EmailTB.Text;
-            row["Ten_ChucVu"] = ChucVuCB.SelectedItem.ToString();
-            row["Ten_PhongBan"] = PhongBanCB.SelectedItem.ToString();
-            row["BaoHiem"] = BaoHiemCB.SelectedItem.ToString();
-            row["TroCap"] = TroCapCB.SelectedItem.ToString();
-        }
         public void CapNhat_Click(object sender, EventArgs e)
         {
             button1.BringToFront();
 
             if (manhanvien == -1) return;
+            GetNhanVien nv = new GetNhanVien();
+            string ID_nhanvien = manhanvien.ToString();
+            nv.UpdateNhanVien(ID_nhanvien, HoTenTB.Text, NgaySinhChoose.Value, GioiTinhCB.SelectedItem.ToString(), QueQuanTB.Text, EmailTB.Text, SDTTB.Text, CCCDTB.Text, DiaChiTB.Text, PhongBanCB.SelectedValue.ToString(), ChucVuCB.SelectedValue.ToString());
 
-            CapNhatQuanLy(_dt);
+            DataGridView dgv = DanhSachNhanVien.DanhSachnv;
+            nv.LoadNhanVien(dgv);
 
             HoTenTB.ReadOnly = true;
             QueQuanTB.ReadOnly = true;
@@ -106,11 +103,12 @@ namespace QuanLyNhanSu
             tableLayoutPanel1.Controls.Remove(GioiTinhCB);
             tableLayoutPanel1.Controls.Add(GioiTinhTB, 1, 2);
             tableLayoutPanel1.Controls.Remove(NgaySinhChoose);
-            tableLayoutPanel2.Controls.Add(NgaySinhTB, 1, 1);
+            tableLayoutPanel1.Controls.Add(NgaySinhTB, 1, 1);
 
             HienThiThongTinCaNhan();
 
-            OnDataChanged();
+            //OnDataChanged();
+            LoadDanhSach?.Invoke(this , EventArgs.Empty);
         }
         private void XoaTK_Click(object sender, EventArgs e)
         {
@@ -118,8 +116,11 @@ namespace QuanLyNhanSu
 
             if (result == DialogResult.Yes)
             {
-                MessageBox.Show("Tài khoản đã được xóa");
-                XoaData();
+                string username = Chuyenkhongdau.Convert(HoTenTB.Text);
+                GetNhanVien nv = new GetNhanVien();
+                nv.XoaNhanVien(manhanvien,username);
+                DataGridView dgv = DanhSachNhanVien.DanhSachnv;
+                nv.LoadNhanVien(dgv);
                 HienThiDanhSach?.Invoke(this, EventArgs.Empty);
                 HoTenTB.Text = "";
                 NgaySinhTB.Text = "";
@@ -143,8 +144,10 @@ namespace QuanLyNhanSu
         DataRow row;
         public void HienThiThongTinCaNhan()
         {
+            DataTable dt = new DataTable();
+            LoadDuLieu(dt);
 
-            DataRow[] rows = _dt.Select($"ID_NhanVien = {manhanvien}");
+            DataRow[] rows = dt.Select($"ID_NhanVien = {manhanvien}");
             //MessageBox.Show("ID = " + manhanvien);
 
             if (rows.Length > 0)
@@ -158,7 +161,7 @@ namespace QuanLyNhanSu
                 EmailTB.ReadOnly = true;
 
                 HoTenTB.Text = row["HoTen"].ToString();
-                NgaySinhTB.Text = row["NgaySinh"] != DBNull.Value ? ((DateTime)row["NgaySinh"]).ToShortDateString() : "";
+                NgaySinhTB.Text = ((DateTime)row["NgaySinh"]).ToShortDateString();
                 GioiTinhTB.Text = row["GioiTinh"].ToString();
                 QueQuanTB.Text = row["QueQuan"].ToString();
                 CCCDTB.Text = row["SoCCCD"].ToString();
@@ -168,16 +171,15 @@ namespace QuanLyNhanSu
                 ChucVuTB.Text = row["Ten_ChucVu"].ToString();
                 PhongBanTB.Text = row["Ten_PhongBan"].ToString();
 
-                if (_dt.Columns.Contains("BaoHiem"))
-                    BaoHiemTB.Text = row["BaoHiem"].ToString();
-                if (_dt.Columns.Contains("TroCap"))
-                    TroCapTB.Text = row["TroCap"].ToString();
+                if (_dt.Columns.Contains("LoaiBaoHiem"))
+                    BaoHiemTB.Text = row["LoaiBaoHiem"].ToString();
+                if (_dt.Columns.Contains("LoaiTroCap"))
+                    TroCapTB.Text = row["LoaiTroCap"].ToString();
             }
             else
             {
                 MessageBox.Show("Không tìm thấy nhân viên với ID: " + manhanvien, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
         protected virtual void OnDataChanged()
         {
@@ -193,11 +195,93 @@ namespace QuanLyNhanSu
         }
         public void DanhSachNhanVien_DataChanged(object sender, EventArgs e)
         {
-            HienThiThongTinCaNhan();
+            //HienThiThongTinCaNhan();
+        }
+
+        private void QuanLyNhanSu1_Load(object sender, EventArgs e)
+        {
+            LoadComboBox("ChucVu", ChucVuCB);
+            LoadComboBox("PhongBan", PhongBanCB);
+            LoadComboBox_2("BaoHiem", BaoHiemCB);
+            LoadComboBox_2("TroCap", TroCapCB);
         }
 
         /*internal class DataSet1 : global::QuanLyNhanSu.DataSet1
         {
         }*/
+        public void LoadComboBox(string value, ComboBox cb)
+        {
+            string query = $"SELECT ID_{value}, Ten_{value} FROM {value}";
+
+            try
+            {
+                using (SqlConnection sqlConnection = new SqlConnection(sqlstring))
+                {
+                    sqlConnection.Open();
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(query, sqlConnection))
+                    {
+                        DataTable dt = new DataTable();
+                        adapter.Fill(dt);
+
+                        cb.DataSource = dt;
+                        cb.DisplayMember = $"Ten_{value}";
+                        cb.ValueMember = $"ID_{value}";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi tải {value}: " + ex.Message);
+            }
+        }
+        public void LoadComboBox_2(string value, ComboBox cb)
+        {
+            string query = $"SELECT ID_{value}, Loai{value} FROM {value}";
+
+            try
+            {
+                using (SqlConnection sqlConnection = new SqlConnection(sqlstring))
+                {
+                    sqlConnection.Open();
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(query, sqlConnection))
+                    {
+                        DataTable dt = new DataTable();
+                        adapter.Fill(dt);
+
+                        cb.DataSource = dt;
+                        cb.DisplayMember = $"Loai{value}";
+                        cb.ValueMember = $"ID_{value}";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi tải {value}: " + ex.Message);
+            }
+        }
+        public void LoadDuLieu(DataTable dt)
+        {
+            using (SqlConnection sqlconnect = new SqlConnection(sqlstring))
+            {
+                sqlconnect.Open();
+                string query = @"SELECT NhanVien.ID_NhanVien, NhanVien.HoTen, NhanVien.NgaySinh, 
+                        NhanVien.GioiTinh, NhanVien.QueQuan, NhanVien.Email, 
+                        NhanVien.SDT, NhanVien.SoCCCD, NhanVien.DiaChi, 
+                        ChucVu.Ten_ChucVu, PhongBan.Ten_PhongBan,BaoHiem.LoaiBaoHiem,TroCap.LoaiTroCap
+                 FROM NhanVien 
+                 JOIN ChucVu ON ChucVu.ID_ChucVu = NhanVien.ID_ChucVu 
+                 JOIN PhongBan ON PhongBan.ID_PhongBan = NhanVien.ID_PhongBan
+                 JOIN TroCap ON TroCap.ID_TroCap = NhanVien.ID_TroCap
+                 JOIN BaoHiem ON BaoHiem.ID_BaoHiem = NhanVien.ID_BaoHiem";
+                using(SqlCommand cmd = new SqlCommand(query, sqlconnect))
+                {
+                    cmd.ExecuteNonQuery();
+                    SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                    adapter.Fill(dt);
+                }
+                
+            }
+        }
     }
+
 }

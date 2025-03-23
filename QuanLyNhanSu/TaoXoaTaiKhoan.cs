@@ -56,6 +56,8 @@ namespace QuanLyNhanSu
         }
         private void TaoTK_Click(object sender, EventArgs e)
         {
+            
+
             try
             {
                 string hoTen = HoTenTB.Text.Trim();
@@ -74,33 +76,34 @@ namespace QuanLyNhanSu
                 string diaChi = DiaChiTB.Text.Trim();
                 int phongBan = PhongBanCB.SelectedValue != null ? Convert.ToInt32(PhongBanCB.SelectedValue) : 0;
                 int chucVu = ChucVuCB.SelectedValue != null ? Convert.ToInt32(ChucVuCB.SelectedValue) : 0;
+                int baoHiem = BaoHiemCB.SelectedValue != null ? Convert.ToInt32(BaoHiemCB.SelectedValue) : 0;
+                int troCap = TroCapCB.SelectedValue != null ? Convert.ToInt32(TroCapCB.SelectedValue) : 0;
                 string soCCCD = CCCDTB.Text.Trim();
 
                 // Chuyển họ tên thành username không dấu
                 string username = Chuyenkhongdau.Convert(hoTen);
-                string query_nhanvien = @"INSERT INTO NhanVien (Username, HoTen, Email, QueQuan, GioiTinh, NgaySinh, SDT, DiaChi, ID_PhongBan, ID_ChucVu, SoCCCD) 
-                                  VALUES (@Username, @HoTen, @Email, @QueQuan, @GioiTinh, @NgaySinh, @SoDT, @DiaChi, @PhongBanID, @ChucVuID, @SoCCCD)";
-
+                string query_nhanvien = @"INSERT INTO NhanVien (Username, HoTen, Email, QueQuan, GioiTinh, NgaySinh, SDT, DiaChi, ID_PhongBan, ID_ChucVu, SoCCCD,ID_BaoHiem,ID_TroCap) 
+                                  VALUES (@Username, @HoTen, @Email, @QueQuan, @GioiTinh, @NgaySinh, @SoDT, @DiaChi, @PhongBanID, @ChucVuID, @SoCCCD,@BaoHiemID,@TroCapID)";
+                string query_luong = @"INSERT INTO Luong (ID_NhanVien,ThangNam,ID_LuongChucVu,ID_TroCap) VALUES (@ID_NhanVien,@ThangNam,@ID_LuongChucVu,@ID_TroCap)";
                 string query_account = @"INSERT INTO NguoiDung (Username, Password, Role) VALUES (@Username, @Password, @Role)";
 
                 using (SqlConnection sqlConnect = new SqlConnection(sqlString))
                 {
                     sqlConnect.Open();
-                    using (SqlTransaction transaction = Connection.GetConnection().BeginTransaction())
+                    using (SqlTransaction transaction = sqlConnect.BeginTransaction()) // Sửa chỗ này
                     {
                         try
                         {
-
-                            using (SqlCommand cmd = new SqlCommand(query_account, Connection.GetConnection(), transaction))
+                            using (SqlCommand cmd = new SqlCommand(query_account, sqlConnect, transaction))
                             {
                                 cmd.Parameters.AddWithValue("@Username", username);
                                 cmd.Parameters.AddWithValue("@Password", soCCCD);
                                 cmd.Parameters.AddWithValue("@Role", Role);
-
                                 cmd.ExecuteNonQuery();
                             }
 
-                            using (SqlCommand cmd = new SqlCommand(query_nhanvien, Connection.GetConnection(), transaction))
+                            int idNhanVien;
+                            using (SqlCommand cmd = new SqlCommand(query_nhanvien + "; SELECT SCOPE_IDENTITY();", sqlConnect, transaction))
                             {
                                 cmd.Parameters.AddWithValue("@Username", username);
                                 cmd.Parameters.AddWithValue("@HoTen", hoTen);
@@ -113,24 +116,35 @@ namespace QuanLyNhanSu
                                 cmd.Parameters.AddWithValue("@PhongBanID", phongBan);
                                 cmd.Parameters.AddWithValue("@ChucVuID", chucVu);
                                 cmd.Parameters.AddWithValue("@SoCCCD", soCCCD);
+                                cmd.Parameters.AddWithValue("@BaoHiemID", baoHiem);
+                                cmd.Parameters.AddWithValue("@TroCapID", troCap);
 
+                                object result = cmd.ExecuteScalar();
+                                if (result == null)
+                                {
+                                    MessageBox.Show("Lỗi khi lấy ID nhân viên!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    return;
+                                }
+                                idNhanVien = Convert.ToInt32(result);
+                            }
+
+                            using (SqlCommand cmd = new SqlCommand(query_luong, sqlConnect, transaction))
+                            {
+                                cmd.Parameters.AddWithValue("@ID_NhanVien", idNhanVien);
+                                cmd.Parameters.AddWithValue("@ThangNam", DateTime.Now);
+                                cmd.Parameters.AddWithValue("@ID_LuongChucVu", chucVu);
+                                cmd.Parameters.AddWithValue("@ID_TroCap", troCap);
                                 cmd.ExecuteNonQuery();
                             }
 
-
-                            // Commit transaction nếu cả 2 INSERT thành công
                             transaction.Commit();
 
+                            GetNhanVien nv = new GetNhanVien();
+
+                            DataGridView dgv = DanhSachNhanVien.DanhSachnv;
+                            nv.LoadNhanVien(dgv);
+
                             MessageBox.Show("Thêm nhân viên & tài khoản thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            HoTenTB.Text = "";
-                            EmailTB.Text = "";
-                            QueQuanTB.Text = "";
-                            GioiTinhCB.Text = "";
-                            SDTTB.Text = "";
-                            DiaChiTB.Text = "";
-                            CCCDTB.Text = "";
-                            PhongBanCB.SelectedIndex = -1;
-                            ChucVuCB.SelectedIndex = -1;
                         }
                         catch (Exception ex)
                         {
@@ -148,9 +162,9 @@ namespace QuanLyNhanSu
             }
 
         }
-        void LoadPhongBan()
+        public void LoadComboBox(string value, ComboBox cb)
         {
-            string query = "SELECT ID_PhongBan, Ten_PhongBan FROM PhongBan";
+            string query = $"SELECT ID_{value}, Ten_{value} FROM {value}";
 
             try
             {
@@ -162,41 +176,40 @@ namespace QuanLyNhanSu
                         DataTable dt = new DataTable();
                         adapter.Fill(dt);
 
-                        PhongBanCB.DataSource = dt;
-                        PhongBanCB.DisplayMember = "Ten_PhongBan";
-                        PhongBanCB.ValueMember = "ID_PhongBan";
+                        cb.DataSource = dt;
+                        cb.DisplayMember = $"Ten_{value}";
+                        cb.ValueMember = $"ID_{value}";
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi tải phòng ban: " + ex.Message);
+                MessageBox.Show($"Lỗi tải {value}: " + ex.Message);
             }
         }
-
-        void LoadChucVu()
+        public void LoadComboBox_2(string value, ComboBox cb)
         {
-            string query = "SELECT ID_ChucVu, Ten_ChucVu FROM ChucVu";
+            string query = $"SELECT ID_{value}, Loai{value} FROM {value}";
 
             try
             {
-                using (SqlConnection sqlConnect = new SqlConnection(sqlString))
+                using (SqlConnection sqlConnection = new SqlConnection(sqlString))
                 {
-                    sqlConnect.Open();
-                    using (SqlDataAdapter adapter = new SqlDataAdapter(query, sqlConnect))
+                    sqlConnection.Open();
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(query, sqlConnection))
                     {
                         DataTable dt = new DataTable();
                         adapter.Fill(dt);
 
-                        ChucVuCB.DataSource = dt;
-                        ChucVuCB.DisplayMember = "Ten_ChucVu";
-                        ChucVuCB.ValueMember = "ID_ChucVu";
+                        cb.DataSource = dt;
+                        cb.DisplayMember = $"Loai{value}";
+                        cb.ValueMember = $"ID_{value}";
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi tải chức vụ: " + ex.Message);
+                MessageBox.Show($"Lỗi tải {value}: " + ex.Message);
             }
         }
 
@@ -225,8 +238,10 @@ namespace QuanLyNhanSu
 
         private void TaoXoaTaiKhoan_Load(object sender, EventArgs e)
         {
-            LoadChucVu();
-            LoadPhongBan();
+            LoadComboBox_2("BaoHiem",BaoHiemCB);
+            LoadComboBox_2("TroCap",TroCapCB);
+            LoadComboBox("PhongBan", PhongBanCB);
+            LoadComboBox("ChucVu", ChucVuCB);
         }
     }
 }

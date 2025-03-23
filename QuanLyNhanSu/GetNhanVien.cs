@@ -22,13 +22,28 @@ namespace QuanLyNhanSu
                 using (SqlConnection sqlconnect = new SqlConnection(sqlstring))
                 {
                     sqlconnect.Open();
-                    string query = @"SELECT NhanVien.ID_NhanVien, NhanVien.HoTen, NhanVien.NgaySinh, 
-                        NhanVien.GioiTinh, NhanVien.QueQuan, NhanVien.Email, 
-                        NhanVien.SDT, NhanVien.SoCCCD, NhanVien.DiaChi, 
-                        ChucVu.Ten_ChucVu, PhongBan.Ten_PhongBan 
-                 FROM NhanVien 
-                 JOIN ChucVu ON ChucVu.ID_ChucVu = NhanVien.ID_ChucVu 
-                 JOIN PhongBan ON PhongBan.ID_PhongBan = NhanVien.ID_PhongBan";
+                    string query = @"
+                                SELECT 
+                                    NhanVien.ID_NhanVien, 
+                                    NhanVien.HoTen, 
+                                    NhanVien.NgaySinh, 
+                                    NhanVien.GioiTinh, 
+                                    NhanVien.QueQuan, 
+                                    NhanVien.Email, 
+                                    NhanVien.SDT, 
+                                    NhanVien.SoCCCD, 
+                                    NhanVien.DiaChi, 
+                                    ChucVu.Ten_ChucVu, 
+                                    PhongBan.Ten_PhongBan, 
+                                    ISNULL(BaoHiem.LoaiBaoHiem, 'Không có') AS LoaiBaoHiem, 
+                                    ISNULL(TroCap.LoaiTroCap, 'Không có') AS LoaiTroCap
+                                FROM NhanVien 
+                                JOIN ChucVu ON ChucVu.ID_ChucVu = NhanVien.ID_ChucVu 
+                                JOIN PhongBan ON PhongBan.ID_PhongBan = NhanVien.ID_PhongBan
+                                LEFT JOIN TroCap ON TroCap.ID_TroCap = NhanVien.ID_TroCap
+                                LEFT JOIN BaoHiem ON BaoHiem.ID_BaoHiem = NhanVien.ID_BaoHiem;
+                            ";
+
 
                     SqlDataAdapter adapter = new SqlDataAdapter(query, sqlconnect);
                     DataTable dt = new DataTable();
@@ -43,45 +58,53 @@ namespace QuanLyNhanSu
                 MessageBox.Show("Lỗi khi tải dữ liệu: " + ex.Message);
             }
         }
-        public void XoaNhanVien(DataGridView dataGridView)
+        public void XoaNhanVien(int id,string username)
         {
-            if (dataGridView.SelectedRows.Count > 0)
-            {
-                DataGridViewRow row = dataGridView.SelectedRows[0];
-                string id = row.Cells["ID_NhanVien"].Value.ToString();
-
+            //if (dataGridView.SelectedRows.Count > 0)
+            //{
+            //    DataGridViewRow row = dataGridView.SelectedRows[0];
                 try
                 {
                     using (SqlConnection sqlconnect = new SqlConnection(sqlstring))
                     {
                         sqlconnect.Open();
-                        string query = "DELETE FROM NhanVien WHERE NhanVien.ID_NhanVien = @id";
-                        using (SqlCommand cmd = new SqlCommand(query, sqlconnect))
+
+                        string query1 = "DELETE FROM Luong WHERE ID_Thuong IN (SELECT ID_Thuong FROM Thuong WHERE ID_NhanVien = @id)";
+                        string query2 = "DELETE FROM Thuong WHERE ID_NhanVien = @id";
+                        string query3 = "DELETE FROM Luong WHERE ID_NhanVien = @id";
+                        string query4 = "DELETE FROM NhanVien WHERE ID_NhanVien = @id";
+                        //string query5 = "DELETE FROM NguoiDung WHERE Username = @username";
+                        //using (SqlCommand cmd5 = new SqlCommand(query5, sqlconnect))
+                        using (SqlCommand cmd1 = new SqlCommand(query1, sqlconnect))
+                        using (SqlCommand cmd2 = new SqlCommand(query2, sqlconnect))
+                        using (SqlCommand cmd3 = new SqlCommand(query3, sqlconnect))
+                        using (SqlCommand cmd4 = new SqlCommand(query4, sqlconnect))
                         {
-                            cmd.Parameters.AddWithValue("@id", id);
-                            int check = cmd.ExecuteNonQuery();
+                            cmd1.Parameters.AddWithValue("@id", id);
+                            cmd2.Parameters.AddWithValue("@id", id);
+                            cmd3.Parameters.AddWithValue("@id", id);
+                            cmd4.Parameters.AddWithValue("@id", id);
+                            //cmd5.Parameters.AddWithValue("@username", username);
+
+                            //cmd5.ExecuteNonQuery();
+                            cmd1.ExecuteNonQuery();
+                            cmd2.ExecuteNonQuery();
+                            cmd3.ExecuteNonQuery();
+                            int check = cmd4.ExecuteNonQuery();
+
                             if (check > 0)
                             {
-                                DialogResult result = MessageBox.Show("Bạn có muốn xóa thông tin nhân viên này không? ", "Xác nhận xóa", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                                if (result == DialogResult.Yes)
-                                {
-                                    MessageBox.Show("Đã xóa thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                    GetNhanVien nv = new GetNhanVien();
-                                    nv.LoadNhanVien(dataGridView);
-                                }
-                            }
-                            else
-                            {
-                                MessageBox.Show("Chọn nhân viên cần xóa");
+                                MessageBox.Show("Đã xóa thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
                         }
                     }
+
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show("Có lỗi: " + ex);
                 }
-            }
+            //}
         }
         public void SuaNhaVien(DataGridView dataGridView)
         {
@@ -101,11 +124,11 @@ namespace QuanLyNhanSu
                 string phongBan = row.Cells["Ten_PhongBan"].Value.ToString();
                 string chucVu = row.Cells["Ten_ChucVu"].Value.ToString();
 
-                using (FormSuaNhanVien suaNhanVien = new FormSuaNhanVien(id, hoTen, ngaySinh, gioiTinh,
-                                                                         queQuan, email, sdt, soCCCD, diaChi, phongBan, chucVu))
-                {
-                    suaNhanVien.ShowDialog();
-                }
+                //using (FormSuaNhanVien suaNhanVien = new FormSuaNhanVien(id, hoTen, ngaySinh, gioiTinh,
+                //                                                         queQuan, email, sdt, soCCCD, diaChi, phongBan, chucVu))
+                //{
+                //    suaNhanVien.ShowDialog();
+                //}
             }
             else
             {
@@ -120,8 +143,8 @@ namespace QuanLyNhanSu
                 using(SqlConnection sqlconnection = new SqlConnection(sqlstring))
                 {
                     sqlconnection.Open();
-                    string result = "%" + search + "%";
-                    string query = "SELECT NhanVien.ID_NhanVien, NhanVien.HoTen, NhanVien.NgaySinh,NhanVien.GioiTinh, NhanVien.QueQuan, NhanVien.Email,NhanVien.SDT, NhanVien.SoCCCD, NhanVien.DiaChi,ChucVu.Ten_ChucVu, PhongBan.Ten_PhongBan FROM NhanVien JOIN ChucVu ON ChucVu.ID_ChucVu = NhanVien.ID_ChucVu JOIN PhongBan ON PhongBan.ID_PhongBan = NhanVien.ID_PhongBan WHERE HoTen LIKE @Search";
+                    string result =  search;
+                    string query = "SELECT NhanVien.ID_NhanVien, NhanVien.HoTen, NhanVien.NgaySinh,NhanVien.GioiTinh, NhanVien.QueQuan, NhanVien.Email,NhanVien.SDT, NhanVien.SoCCCD, NhanVien.DiaChi,ChucVu.Ten_ChucVu, PhongBan.Ten_PhongBan FROM NhanVien JOIN ChucVu ON ChucVu.ID_ChucVu = NhanVien.ID_ChucVu JOIN PhongBan ON PhongBan.ID_PhongBan = NhanVien.ID_PhongBan WHERE ID_NhanVien = @Search";
                     using(SqlCommand cmd = new SqlCommand(query, sqlconnection))
                     {
                         cmd.Parameters.AddWithValue("@Search", result);
@@ -232,7 +255,7 @@ namespace QuanLyNhanSu
             }
         }
 
-        public void LogOut()
+        public void LogOut(Form currentForm)
         {
             DialogResult result = MessageBox.Show("Bạn có chắc chắn muốn đăng xuất?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
@@ -241,8 +264,13 @@ namespace QuanLyNhanSu
                 User.ID_NhanVien = 0;
                 User.Password = null;
                 User.Role = null;
+
+                currentForm.Close();
+                Application.Restart();
+
             }
         }
+
 
         public void UpdateNhanVien(string id, string hoTen, DateTime ngaySinh, string gioiTinh,
                            string queQuan, string email, string sdt, string soCCCD,

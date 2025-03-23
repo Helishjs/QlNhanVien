@@ -63,12 +63,14 @@ namespace QuanLyNhanSu
         private void FormNhanvien_Load(object sender, EventArgs e)
         {
             getNhanVien();
-            LoadPhongBan();
-            LoadChucVu();
+            LoadComboBox("PhongBan", cbPhongban);
+            LoadComboBox("ChucVu", cbChucvu);
+            LoadComboBox_2("TroCap", cbTroCap);
+            LoadComboBox_2("BaoHiem", cbBaoHiem);
         }
-        void LoadPhongBan()
+        public void LoadComboBox(string value, ComboBox cb)
         {
-            string query = "SELECT ID_PhongBan, Ten_PhongBan FROM PhongBan";
+            string query = $"SELECT ID_{value}, Ten_{value} FROM {value}";
 
             try
             {
@@ -80,44 +82,42 @@ namespace QuanLyNhanSu
                         DataTable dt = new DataTable();
                         adapter.Fill(dt);
 
-                        cbPhongban.DataSource = dt;
-                        cbPhongban.DisplayMember = "Ten_PhongBan";
-                        cbPhongban.ValueMember = "ID_PhongBan";
+                        cb.DataSource = dt;
+                        cb.DisplayMember = $"Ten_{value}";
+                        cb.ValueMember = $"ID_{value}";
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi tải phòng ban: " + ex.Message);
+                MessageBox.Show($"Lỗi tải {value}: " + ex.Message);
             }
         }
-
-        void LoadChucVu()
+        public void LoadComboBox_2(string value, ComboBox cb)
         {
-            string query = "SELECT ID_ChucVu, Ten_ChucVu FROM ChucVu";
+            string query = $"SELECT ID_{value}, Loai{value} FROM {value}";
 
             try
             {
-                using (SqlConnection sqlConnect = new SqlConnection(sqlString))
+                using (SqlConnection sqlConnection = new SqlConnection(sqlString))
                 {
-                    sqlConnect.Open();
-                    using (SqlDataAdapter adapter = new SqlDataAdapter(query, sqlConnect))
+                    sqlConnection.Open();
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(query, sqlConnection))
                     {
                         DataTable dt = new DataTable();
                         adapter.Fill(dt);
 
-                        cbChucvu.DataSource = dt;
-                        cbChucvu.DisplayMember = "Ten_ChucVu";
-                        cbChucvu.ValueMember = "ID_ChucVu";
+                        cb.DataSource = dt;
+                        cb.DisplayMember = $"Loai{value}";
+                        cb.ValueMember = $"ID_{value}";
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi tải chức vụ: " + ex.Message);
+                MessageBox.Show($"Lỗi tải {value}: " + ex.Message);
             }
         }
-
 
 
 
@@ -142,33 +142,34 @@ namespace QuanLyNhanSu
                 string diaChi = tbDiachi.Text.Trim();
                 int phongBan = cbPhongban.SelectedValue != null ? Convert.ToInt32(cbPhongban.SelectedValue) : 0;
                 int chucVu = cbChucvu.SelectedValue != null ? Convert.ToInt32(cbChucvu.SelectedValue) : 0;
+                int baoHiem = cbBaoHiem.SelectedValue != null ? Convert.ToInt32(cbBaoHiem.SelectedValue) : 0;
+                int troCap = cbTroCap.SelectedValue != null ? Convert.ToInt32(cbTroCap.SelectedValue) : 0;
                 string soCCCD = tbCCCD.Text.Trim();
 
                 // Chuyển họ tên thành username không dấu
                 string username = Chuyenkhongdau.Convert(hoTen);
-                string query_nhanvien = @"INSERT INTO NhanVien (Username, HoTen, Email, QueQuan, GioiTinh, NgaySinh, SDT, DiaChi, ID_PhongBan, ID_ChucVu, SoCCCD) 
-                                  VALUES (@Username, @HoTen, @Email, @QueQuan, @GioiTinh, @NgaySinh, @SoDT, @DiaChi, @PhongBanID, @ChucVuID, @SoCCCD)";
-
+                string query_nhanvien = @"INSERT INTO NhanVien (Username, HoTen, Email, QueQuan, GioiTinh, NgaySinh, SDT, DiaChi, ID_PhongBan, ID_ChucVu, SoCCCD,ID_BaoHiem,ID_TroCap) 
+                                  VALUES (@Username, @HoTen, @Email, @QueQuan, @GioiTinh, @NgaySinh, @SoDT, @DiaChi, @PhongBanID, @ChucVuID, @SoCCCD,@BaoHiemID,@TroCapID)";
+                string query_luong = @"INSERT INTO Luong (ID_NhanVien,ThangNam,ID_LuongChucVu,ID_TroCap) VALUES (@ID_NhanVien,@ThangNam,@ID_LuongChucVu,@ID_TroCap)";
                 string query_account = @"INSERT INTO NguoiDung (Username, Password, Role) VALUES (@Username, @Password, @Role)";
 
                 using (SqlConnection sqlConnect = new SqlConnection(sqlString))
                 {
                     sqlConnect.Open();
-                    using (SqlTransaction transaction = Connection.GetConnection().BeginTransaction())
+                    using (SqlTransaction transaction = sqlConnect.BeginTransaction()) // Sửa chỗ này
                     {
                         try
                         {
-
-                            using (SqlCommand cmd = new SqlCommand(query_account, Connection.GetConnection(), transaction))
+                            using (SqlCommand cmd = new SqlCommand(query_account, sqlConnect, transaction))
                             {
                                 cmd.Parameters.AddWithValue("@Username", username);
                                 cmd.Parameters.AddWithValue("@Password", soCCCD);
                                 cmd.Parameters.AddWithValue("@Role", Role);
-
                                 cmd.ExecuteNonQuery();
                             }
 
-                            using (SqlCommand cmd = new SqlCommand(query_nhanvien, Connection.GetConnection(), transaction))
+                            int idNhanVien;
+                            using (SqlCommand cmd = new SqlCommand(query_nhanvien + "; SELECT SCOPE_IDENTITY();", sqlConnect, transaction))
                             {
                                 cmd.Parameters.AddWithValue("@Username", username);
                                 cmd.Parameters.AddWithValue("@HoTen", hoTen);
@@ -181,25 +182,30 @@ namespace QuanLyNhanSu
                                 cmd.Parameters.AddWithValue("@PhongBanID", phongBan);
                                 cmd.Parameters.AddWithValue("@ChucVuID", chucVu);
                                 cmd.Parameters.AddWithValue("@SoCCCD", soCCCD);
+                                cmd.Parameters.AddWithValue("@BaoHiemID", baoHiem);
+                                cmd.Parameters.AddWithValue("@TroCapID", troCap);
 
+                                object result = cmd.ExecuteScalar();
+                                if (result == null)
+                                {
+                                    MessageBox.Show("Lỗi khi lấy ID nhân viên!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    return;
+                                }
+                                idNhanVien = Convert.ToInt32(result);
+                            }
+
+                            using (SqlCommand cmd = new SqlCommand(query_luong, sqlConnect, transaction))
+                            {
+                                cmd.Parameters.AddWithValue("@ID_NhanVien", idNhanVien);
+                                cmd.Parameters.AddWithValue("@ThangNam", DateTime.Now);
+                                cmd.Parameters.AddWithValue("@ID_LuongChucVu", chucVu);
+                                cmd.Parameters.AddWithValue("@ID_TroCap", troCap);
                                 cmd.ExecuteNonQuery();
                             }
 
-
-                            // Commit transaction nếu cả 2 INSERT thành công
                             transaction.Commit();
-
                             MessageBox.Show("Thêm nhân viên & tài khoản thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             getNhanVien();
-                            tbHoten.Text = "";
-                            tbEmail.Text = "";
-                            tbQuequan.Text = "";
-                            tbGioitinh.Text = "";
-                            tbSDT.Text = "";
-                            tbDiachi.Text = "";
-                            tbCCCD.Text = "";
-                            cbPhongban.SelectedIndex = -1;
-                            cbChucvu.SelectedIndex = -1;
                         }
                         catch (Exception ex)
                         {
@@ -208,8 +214,7 @@ namespace QuanLyNhanSu
                         }
                     }
                 }
-                {    
-                }
+
             }
             catch (Exception ex)
             {

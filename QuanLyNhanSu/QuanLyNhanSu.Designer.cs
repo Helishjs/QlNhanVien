@@ -440,9 +440,6 @@
             this.BaoHiemCB.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.BaoHiemCB.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BaoHiemCB.FormattingEnabled = true;
-            this.BaoHiemCB.Items.AddRange(new object[] {
-            "Có",
-            "Không"});
             this.BaoHiemCB.Location = new System.Drawing.Point(338, 320);
             this.BaoHiemCB.Margin = new System.Windows.Forms.Padding(2);
             this.BaoHiemCB.Name = "BaoHiemCB";
@@ -484,11 +481,6 @@
             this.PhongBanCB.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.PhongBanCB.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PhongBanCB.FormattingEnabled = true;
-            this.PhongBanCB.Items.AddRange(new object[] {
-            "Marketing",
-            "Tài Chính",
-            "Nhân Sự",
-            "Quản Lý"});
             this.PhongBanCB.Location = new System.Drawing.Point(348, 322);
             this.PhongBanCB.Margin = new System.Windows.Forms.Padding(2);
             this.PhongBanCB.Name = "PhongBanCB";
@@ -500,11 +492,6 @@
             this.ChucVuCB.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.ChucVuCB.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ChucVuCB.FormattingEnabled = true;
-            this.ChucVuCB.Items.AddRange(new object[] {
-            "Sếp",
-            "Nhân Viên Thường",
-            "Nghiệp Vụ",
-            "Nhân Viên Nghỉ"});
             this.ChucVuCB.Location = new System.Drawing.Point(436, 342);
             this.ChucVuCB.Margin = new System.Windows.Forms.Padding(2);
             this.ChucVuCB.Name = "ChucVuCB";
@@ -551,7 +538,7 @@
             this.pictureBox1.TabIndex = 28;
             this.pictureBox1.TabStop = false;
             // 
-            // QuanLyNhanSu
+            // QuanLyNhanSu1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -567,8 +554,9 @@
             this.Controls.Add(this.GioiTinhCB);
             this.Controls.Add(this.NgaySinhChoose);
             this.Controls.Add(this.CapNhat);
-            this.Name = "QuanLyNhanSu";
+            this.Name = "QuanLyNhanSu1";
             this.Size = new System.Drawing.Size(602, 448);
+            this.Load += new System.EventHandler(this.QuanLyNhanSu1_Load);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);

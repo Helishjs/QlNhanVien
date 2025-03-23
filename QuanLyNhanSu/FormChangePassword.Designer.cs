@@ -41,7 +41,7 @@
             // 
             // btnChangePassword
             // 
-            this.btnChangePassword.Location = new System.Drawing.Point(170, 266);
+            this.btnChangePassword.Location = new System.Drawing.Point(256, 289);
             this.btnChangePassword.Name = "btnChangePassword";
             this.btnChangePassword.Size = new System.Drawing.Size(116, 29);
             this.btnChangePassword.TabIndex = 9;
@@ -52,7 +52,8 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(93, 190);
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Location = new System.Drawing.Point(179, 213);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(93, 13);
             this.label2.TabIndex = 8;
@@ -61,7 +62,8 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(93, 134);
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(179, 157);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(71, 13);
             this.label1.TabIndex = 7;
@@ -69,7 +71,7 @@
             // 
             // tbrepassword
             // 
-            this.tbrepassword.Location = new System.Drawing.Point(96, 206);
+            this.tbrepassword.Location = new System.Drawing.Point(182, 229);
             this.tbrepassword.Name = "tbrepassword";
             this.tbrepassword.Size = new System.Drawing.Size(272, 20);
             this.tbrepassword.TabIndex = 6;
@@ -77,7 +79,8 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(93, 77);
+            this.label3.ForeColor = System.Drawing.Color.White;
+            this.label3.Location = new System.Drawing.Point(179, 100);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(52, 13);
             this.label3.TabIndex = 11;
@@ -85,7 +88,7 @@
             // 
             // tboldpassword
             // 
-            this.tboldpassword.Location = new System.Drawing.Point(96, 93);
+            this.tboldpassword.Location = new System.Drawing.Point(182, 116);
             this.tboldpassword.Name = "tboldpassword";
             this.tboldpassword.Size = new System.Drawing.Size(272, 20);
             this.tboldpassword.TabIndex = 10;
@@ -94,7 +97,8 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(139, 19);
+            this.label4.ForeColor = System.Drawing.Color.White;
+            this.label4.Location = new System.Drawing.Point(225, 42);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(187, 33);
             this.label4.TabIndex = 12;
@@ -103,7 +107,7 @@
             // btnshowpassword
             // 
             this.btnshowpassword.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnshowpassword.Location = new System.Drawing.Point(336, 149);
+            this.btnshowpassword.Location = new System.Drawing.Point(422, 172);
             this.btnshowpassword.Name = "btnshowpassword";
             this.btnshowpassword.Size = new System.Drawing.Size(32, 21);
             this.btnshowpassword.TabIndex = 13;
@@ -113,7 +117,7 @@
             // 
             // tbnewpassword
             // 
-            this.tbnewpassword.Location = new System.Drawing.Point(96, 150);
+            this.tbnewpassword.Location = new System.Drawing.Point(182, 173);
             this.tbnewpassword.Name = "tbnewpassword";
             this.tbnewpassword.Size = new System.Drawing.Size(272, 20);
             this.tbnewpassword.TabIndex = 5;
@@ -122,8 +126,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(475, 313);
+            this.BackColor = System.Drawing.Color.Gray;
+            this.ClientSize = new System.Drawing.Size(628, 365);
             this.Controls.Add(this.btnshowpassword);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);

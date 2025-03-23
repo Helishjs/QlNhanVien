@@ -22,6 +22,9 @@ namespace QuanLyNhanSu
         public static string ChucVu { get; set; }
         public static string PhongBan { get; set; }
         public static string Role { get; set; }
+        public static bool IsLoggedOut { get; set; }
     }
+
+
 }
 

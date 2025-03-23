@@ -73,6 +73,16 @@ namespace QuanLyNhanSu.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Minimal_Envelope_Animation {
+            get {
+                object obj = ResourceManager.GetObject("Minimal Envelope Animation", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap peakpx {
             get {
                 object obj = ResourceManager.GetObject("peakpx", resourceCulture);

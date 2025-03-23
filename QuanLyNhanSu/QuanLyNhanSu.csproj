@@ -59,125 +59,41 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataSet1.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Main.cs">
+    <Compile Include="FormUser.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Main.Designer.cs">
-      <DependentUpon>Main.cs</DependentUpon>
+    <Compile Include="FormUser.Designer.cs">
+      <DependentUpon>FormUser.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form10.cs">
+    <Compile Include="FormAdmin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form10.Designer.cs">
-      <DependentUpon>Form10.cs</DependentUpon>
+    <Compile Include="FormAdmin.Designer.cs">
+      <DependentUpon>FormAdmin.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form11.cs">
+    <Compile Include="FormLuong.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form11.Designer.cs">
-      <DependentUpon>Form11.cs</DependentUpon>
+    <Compile Include="FormLuong.Designer.cs">
+      <DependentUpon>FormLuong.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form12.cs">
+    <Compile Include="FormPhamLoi.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form12.Designer.cs">
-      <DependentUpon>Form12.cs</DependentUpon>
+    <Compile Include="FormPhamLoi.Designer.cs">
+      <DependentUpon>FormPhamLoi.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form13.cs">
+    <Compile Include="FormKhenThuong.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form13.Designer.cs">
-      <DependentUpon>Form13.cs</DependentUpon>
+    <Compile Include="FormKhenThuong.Designer.cs">
+      <DependentUpon>FormKhenThuong.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form14.cs">
+    <Compile Include="FormDangKyLam.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form14.Designer.cs">
-      <DependentUpon>Form14.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form15.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form15.Designer.cs">
-      <DependentUpon>Form15.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form16.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form16.Designer.cs">
-      <DependentUpon>Form16.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form17.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form17.Designer.cs">
-      <DependentUpon>Form17.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form18.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form18.Designer.cs">
-      <DependentUpon>Form18.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form19.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form19.Designer.cs">
-      <DependentUpon>Form19.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form2.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form2.Designer.cs">
-      <DependentUpon>Form2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form20.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form20.Designer.cs">
-      <DependentUpon>Form20.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form3.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form3.Designer.cs">
-      <DependentUpon>Form3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form4.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form4.Designer.cs">
-      <DependentUpon>Form4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form5.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form5.Designer.cs">
-      <DependentUpon>Form5.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form6.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form6.Designer.cs">
-      <DependentUpon>Form6.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form7.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form7.Designer.cs">
-      <DependentUpon>Form7.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form8.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form8.Designer.cs">
-      <DependentUpon>Form8.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form9.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form9.Designer.cs">
-      <DependentUpon>Form9.cs</DependentUpon>
+    <Compile Include="FormDangKyLam.Designer.cs">
+      <DependentUpon>FormDangKyLam.cs</DependentUpon>
     </Compile>
     <Compile Include="FormChangePassword.cs">
       <SubType>Form</SubType>
@@ -196,12 +112,6 @@
     </Compile>
     <Compile Include="FormNhanvien.Designer.cs">
       <DependentUpon>FormNhanvien.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FormSuaNhanVien.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormSuaNhanVien.Designer.cs">
-      <DependentUpon>FormSuaNhanVien.cs</DependentUpon>
     </Compile>
     <Compile Include="GetNhanVien.cs" />
     <Compile Include="ManHinhChao.cs">
@@ -228,65 +138,23 @@
     <EmbeddedResource Include="DanhSachNhanVien.resx">
       <DependentUpon>DanhSachNhanVien.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Main.resx">
-      <DependentUpon>Main.cs</DependentUpon>
+    <EmbeddedResource Include="FormUser.resx">
+      <DependentUpon>FormUser.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form10.resx">
-      <DependentUpon>Form10.cs</DependentUpon>
+    <EmbeddedResource Include="FormAdmin.resx">
+      <DependentUpon>FormAdmin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form11.resx">
-      <DependentUpon>Form11.cs</DependentUpon>
+    <EmbeddedResource Include="FormLuong.resx">
+      <DependentUpon>FormLuong.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form12.resx">
-      <DependentUpon>Form12.cs</DependentUpon>
+    <EmbeddedResource Include="FormPhamLoi.resx">
+      <DependentUpon>FormPhamLoi.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form13.resx">
-      <DependentUpon>Form13.cs</DependentUpon>
+    <EmbeddedResource Include="FormKhenThuong.resx">
+      <DependentUpon>FormKhenThuong.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form14.resx">
-      <DependentUpon>Form14.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form15.resx">
-      <DependentUpon>Form15.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form16.resx">
-      <DependentUpon>Form16.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form17.resx">
-      <DependentUpon>Form17.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form18.resx">
-      <DependentUpon>Form18.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form19.resx">
-      <DependentUpon>Form19.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form2.resx">
-      <DependentUpon>Form2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form20.resx">
-      <DependentUpon>Form20.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form3.resx">
-      <DependentUpon>Form3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form4.resx">
-      <DependentUpon>Form4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form5.resx">
-      <DependentUpon>Form5.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form6.resx">
-      <DependentUpon>Form6.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form7.resx">
-      <DependentUpon>Form7.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form8.resx">
-      <DependentUpon>Form8.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form9.resx">
-      <DependentUpon>Form9.cs</DependentUpon>
+    <EmbeddedResource Include="FormDangKyLam.resx">
+      <DependentUpon>FormDangKyLam.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormChangePassword.resx">
       <DependentUpon>FormChangePassword.cs</DependentUpon>
@@ -296,9 +164,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormNhanvien.resx">
       <DependentUpon>FormNhanvien.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormSuaNhanVien.resx">
-      <DependentUpon>FormSuaNhanVien.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ManHinhChao.resx">
       <DependentUpon>ManHinhChao.cs</DependentUpon>
@@ -348,6 +213,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\peakpx.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Envelope Animation.gif" />
+    <None Include="Resources\Minimal Envelope Animation.gif" />
+    <Content Include="Resources\pexels-alamsaim-29212739.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
